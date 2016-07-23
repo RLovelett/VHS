@@ -1,0 +1,13 @@
+[
+  {
+    "request": {
+        "url": "http://api.test.com"
+    },
+    "response": {
+        "url": "http://api.test.com",
+        "body": "hello",
+        "status": 200,
+        "headers": {}
+    }
+  }
+]

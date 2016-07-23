@@ -1,0 +1,22 @@
+[
+ {
+    "request": {
+        "url": "http://api.test1.com",
+    },
+    "response": {
+        "url": "http://api.test1.com",
+        "status": 200,
+        "headers": {}
+    }
+ },
+ {
+    "request": {
+        "url": "http://api.test2.com",
+    },
+    "response": {
+        "url": "http://api.test2.com",
+        "status": 200,
+        "headers": {}
+    }
+ }
+]

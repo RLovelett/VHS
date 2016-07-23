@@ -1,0 +1,12 @@
+{
+  "url": "http://api.test.com",
+  "method": "POST",
+  "headers": {
+    "one": "two",
+    "three": 4
+  },
+  "body": {
+    "username": "ziggy",
+    "password": "stardust"
+  }
+}

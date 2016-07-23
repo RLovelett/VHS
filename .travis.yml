@@ -1,0 +1,15 @@
+language: objective-c
+osx_image: xcode8
+xcode_project: VHS.xcodeproj
+xcode_scheme: VHS
+before_install:
+  - gem install xcpretty
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+before_script:
+  # bootstrap the dependencies for the project
+  # you can remove if you don't have dependencies
+  - carthage bootstrap --no-use-binaries
+script:
+  - set -o pipefail  # required to let xcpretty use the same exit code like xcodebuild
+  - xcodebuild test CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" -project VHS.xcodeproj -scheme VHS | xcpretty -c

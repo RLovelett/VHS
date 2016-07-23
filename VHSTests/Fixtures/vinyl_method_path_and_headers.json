@@ -1,0 +1,54 @@
+[
+    {
+        "request": {
+            "method": "GET",
+            "url": "http://api.test1.com/get/with/no/headers"
+        },
+        "response": {
+            "body": "No header match!",
+            "headers": {
+                "response": "header-though!",
+                "Content-Type": "text/plain;charset=utf-8",
+                "Content-Length" : "16"
+            },
+            "status": 200,
+            "url": "http://api.test1.com/get/with/no/headers"
+        }
+    },
+    {
+        "request": {
+            "headers": {
+                "andThing": "two",
+                "thing": "one"
+            },
+            "method": "GET",
+            "url": "http://api.test1.com/get/with/headers"
+        },
+        "response": {
+            "body": "Header match!",
+            "headers": {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            "status": 201,
+            "url": "http://api.test1.com/get/with/headers"
+        }
+    },
+    {
+        "request": {
+            "headers": {
+                "andThing": "two",
+                "thing": "one"
+            },
+            "method": "POST",
+            "url": "http://api.test1.com/get/with/headers"
+        },
+        "response": {
+            "body": "[POST] Header match!",
+            "headers": {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            "status": 202,
+            "url": "http://api.test1.com/get/with/headers"
+        }
+    }
+]

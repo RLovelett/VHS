@@ -1,0 +1,9 @@
+included:
+    - VHS
+    - VHSTests
+disabled_rules:
+   - nesting
+   - todo
+   - conditional_binding_cascade
+opt_in_rules:
+    - empty_count

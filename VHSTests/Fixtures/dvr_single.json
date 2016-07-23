@@ -1,0 +1,30 @@
+{
+    "interactions": [
+        {
+            "recorded_at": 1434688721.440751,
+            "request": {
+                "method": "GET",
+                "url": "http://api.test.com"
+            },
+            "response": {
+                "body": "hello",
+                "headers": {
+                    "Accept-Ranges": "bytes",
+                    "Cache-Control": "max-age=604800",
+                    "Content-Length": "5",
+                    "Content-Type": "text/plain",
+                    "Date": "Fri, 19 Jun 2015 04:38:41 GMT",
+                    "Etag": "\"359670651\"",
+                    "Expires": "Fri, 26 Jun 2015 04:38:41 GMT",
+                    "Last-Modified": "Fri, 09 Aug 2013 23:54:35 GMT",
+                    "Server": "ECS (rhv/818F)",
+                    "X-Cache": "HIT",
+                    "x-ec-custom-error": "1"
+                },
+                "status": 200,
+                "url": "http://api.test.com"
+            }
+        }
+    ],
+    "name": "dvr_single"
+}

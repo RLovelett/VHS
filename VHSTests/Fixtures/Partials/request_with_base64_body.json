@@ -1,0 +1,6 @@
+{
+    "url": "http://api.test.com",
+    "method": "POST",
+    "headers": {},
+    "body": "eyJ1c2VybmFtZSI6InppZ2d5IiwicGFzc3dvcmQiOiJzdGFyZHVzdCJ9"
+}

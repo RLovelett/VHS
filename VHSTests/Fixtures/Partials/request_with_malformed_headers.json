@@ -1,0 +1,9 @@
+{
+    "url": "http://api.test.com",
+    "method": "POST",
+    "headers": "malformed",
+    "body": {
+        "username": "ziggy",
+        "password": "stardust"
+    }
+}

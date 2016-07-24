@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>VCR Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/VCR" class="dashAnchor"></a>
+    <a title="VCR Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        VCR Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/VCR.html">VCR</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VCR/Error.html">– Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VCR/PlaybackSequence.html">– PlaybackSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VCR/ReplayCount.html">– ReplayCount</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Cassette.html">Cassette</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Track.html">Track</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>VCR</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">VCR</span><span class="p">:</span> <span class="kt">URLSession</span></code></pre>
+
+                </div>
+              </div>
+            <p>A <code>VCR</code> instance is used to replay HTTP interactions from a predefined fixture. Often the
+recorded interactions are provided as a collection contained in a <code><a href="../Structs/Cassette.html">Cassette</a></code> instance.</p>
+
+<p>The class extends <a href="https://developer.apple.com/reference/foundation/nsurlsession"><code>URLSession</code></a>.</p>
+
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html">Using NSURLSession</a>
+
+</div>
+
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <a href="https://developer.apple.com/library/prerelease/content/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i">About the URL Loading System</a>
+
+</div>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:OC3VHS3VCR5Error"></a>
+                    <a name="//apple_ref/swift/Enum/Error" class="dashAnchor"></a>
+                    <a class="token" href="#/s:OC3VHS3VCR5Error">Error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set of errors that may be encountered at run-time when interacting with a recored HTTP
+interaction.</p>
+
+                        <a href="../Classes/VCR/Error.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:OC3VHS3VCR16PlaybackSequence"></a>
+                    <a name="//apple_ref/swift/Enum/PlaybackSequence" class="dashAnchor"></a>
+                    <a class="token" href="#/s:OC3VHS3VCR16PlaybackSequence">PlaybackSequence</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that indicates how the <code><a href="../Classes/VCR.html">VCR</a></code> instance should playback the recorded HTTP interactions
+from the loaded <code><a href="../Structs/Cassette.html">Cassette</a></code>.</p>
+
+                        <a href="../Classes/VCR/PlaybackSequence.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PlaybackSequence</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:OC3VHS3VCR11ReplayCount"></a>
+                    <a name="//apple_ref/swift/Enum/ReplayCount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:OC3VHS3VCR11ReplayCount">ReplayCount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A type that indicates how many times the <code><a href="../Classes/VCR.html">VCR</a></code> instance should playback the recorded HTTP
+interactions from the loaded <code><a href="../Structs/Cassette.html">Cassette</a></code>.</p>
+
+                        <a href="../Classes/VCR/ReplayCount.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ReplayCount</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC3VHS3VCRcFT4playVS_8Cassette2inGSqCSo14OperationQueue_5matchOS0_16PlaybackSequence6replayOS0_11ReplayCount6notifyGSqPSo18URLSessionDelegate___S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(play:in:match:replay:notify:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC3VHS3VCRcFT4playVS_8Cassette2inGSqCSo14OperationQueue_5matchOS0_16PlaybackSequence6replayOS0_11ReplayCount6notifyGSqPSo18URLSessionDelegate___S0_">init(play:in:match:replay:notify:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>VCR</code> instance to playback recorded HTTP interactions from a <code><a href="../Structs/Cassette.html">Cassette</a></code>.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter play: The <code><a href="../Structs/Cassette.html">Cassette</a></code> containing the HTTP interactions to be played back.
+
+</div>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter in: The <code>OperationQueue</code> to send the asynchronous results back on. Defaults to
+a new <code>OperationQueue</code> instance that can perform at most 1 operation at a time.
+
+</div>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter match: The order in which to playback the <code><a href="../Structs/Cassette.html">Cassette</a></code>. Defaults to the
+<code><a href="../Structs/Cassette.html">Cassette</a></code>&rsquo;s internal order.
+
+</div>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter replay: The number of times to replay the HTTP interactions in the <code><a href="../Structs/Cassette.html">Cassette</a></code>.
+Defaults to playing each <code><a href="../Structs/Track.html">Track</a></code> one time only.
+
+</div>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter notify: A delegate to notify of session level events. Default is no delegate.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+        <span class="n">play</span> <span class="nv">cassette</span><span class="p">:</span> <span class="kt"><a href="../Structs/Cassette.html">Cassette</a></span><span class="p">,</span>
+        <span class="k">in</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">OperationQueue</span><span class="p">?</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
+        <span class="n">match</span> <span class="nv">sequenceType</span><span class="p">:</span> <span class="kt"><a href="../Classes/VCR/PlaybackSequence.html">PlaybackSequence</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">cassetteOrder</span><span class="p">,</span>
+        <span class="n">replay</span> <span class="nv">duration</span><span class="p">:</span> <span class="kt"><a href="../Classes/VCR/ReplayCount.html">ReplayCount</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span><span class="p">,</span>
+        <span class="n">notify</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt">URLSessionDelegate</span><span class="p">?</span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span>
+    <span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>play</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>Cassette</code> containing the HTTP interactions to be played back.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>in</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>OperationQueue</code> to send the asynchronous results back on. Defaults to a new <code>OperationQueue</code> instance that can perform at most 1 operation at a time.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>match</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The order in which to playback the <code>Cassette</code>. Defaults to the <code>Cassette</code>’s internal order.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>replay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of times to replay the HTTP interactions in the <code>Cassette</code>. Defaults to playing each <code>Track</code> one time only.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>notify</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A delegate to notify of session level events. Default is no delegate.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC3VHS3VCR8delegateGSqPSo18URLSessionDelegate__"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC3VHS3VCR8delegateGSqPSo18URLSessionDelegate__">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The delegate assigned when this object was created.</p>
+
+<div class="aside aside-remark">
+    <p class="aside-title">Remark</p>
+    <p>This property is required by the base class.</p>
+
+</div>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>This delegate object must be set at object creation time and may not be changed.
+This requirement comes from the base class <code>NSURLSession</code>.</p>
+
+</div>
+
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <p><a href="https://developer.apple.com/reference/foundation/nsurlsession/1411530-delegate">https://developer.apple.com/reference/foundation/nsurlsession/1411530-delegate</a></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt">URLSessionDelegate</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC3VHS3VCR8dataTaskFT4withV10Foundation3URL_CSo18URLSessionDataTask"></a>
+                    <a name="//apple_ref/swift/Method/dataTask(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC3VHS3VCR8dataTaskFT4withV10Foundation3URL_CSo18URLSessionDataTask">dataTask(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a task that retrieves the contents of the specified URL.</p>
+
+<div class="aside aside-remark">
+    <p class="aside-title">Remark</p>
+    <p>This property is required by the base class.</p>
+
+</div>
+
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <p><a href="https://developer.apple.com/reference/foundation/nsurlsession/1411554-datatask">https://developer.apple.com/reference/foundation/nsurlsession/1411554-datatask</a></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">dataTask</span><span class="p">(</span><span class="n">with</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URLSessionDataTask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC3VHS3VCR8dataTaskFT4withV10Foundation10URLRequest_CSo18URLSessionDataTask"></a>
+                    <a name="//apple_ref/swift/Method/dataTask(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC3VHS3VCR8dataTaskFT4withV10Foundation10URLRequest_CSo18URLSessionDataTask">dataTask(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a task that retrieves the contents of the specified URL, then calls a handler upon
+completion. The task bypasses calls to delegate methods for response and data delivery, and
+instead provides any resulting NSData, URLResponse, and NSError objects inside the
+completion handler. Delegate methods for handling authentication challenges, however, are
+still called.</p>
+
+<div class="aside aside-remark">
+    <p class="aside-title">Remark</p>
+    <p>This property is required by the base class.</p>
+
+</div>
+
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <p><a href="https://developer.apple.com/reference/foundation/nsurlsession/1410330-datatask">https://developer.apple.com/reference/foundation/nsurlsession/1410330-datatask</a></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">dataTask</span><span class="p">(</span><span class="n">with</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">URLRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URLSessionDataTask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC3VHS3VCR8dataTaskFT4withV10Foundation3URL17completionHandlerFTGSqVS1_4Data_GSqCSo11URLResponse_GSqCSo7NSError__T__CSo18URLSessionDataTask"></a>
+                    <a name="//apple_ref/swift/Method/dataTask(with:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC3VHS3VCR8dataTaskFT4withV10Foundation3URL17completionHandlerFTGSqVS1_4Data_GSqCSo11URLResponse_GSqCSo7NSError__T__CSo18URLSessionDataTask">dataTask(with:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a task that retrieves the contents of a URL based on the specified URL request
+object.</p>
+
+<div class="aside aside-remark">
+    <p class="aside-title">Remark</p>
+    <p>This property is required by the base class.</p>
+
+</div>
+
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <p><a href="https://developer.apple.com/reference/foundation/nsurlsession/1410592-datatask">https://developer.apple.com/reference/foundation/nsurlsession/1410592-datatask</a></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">dataTask</span><span class="p">(</span>
+        <span class="n">with</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+        <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">(</span><span class="kt">Data</span><span class="p">?,</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="kt">NSError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URLSessionDataTask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC3VHS3VCR8dataTaskFT4withV10Foundation10URLRequest17completionHandlerFTGSqVS1_4Data_GSqCSo11URLResponse_GSqCSo7NSError__T__CSo18URLSessionDataTask"></a>
+                    <a name="//apple_ref/swift/Method/dataTask(with:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC3VHS3VCR8dataTaskFT4withV10Foundation10URLRequest17completionHandlerFTGSqVS1_4Data_GSqCSo11URLResponse_GSqCSo7NSError__T__CSo18URLSessionDataTask">dataTask(with:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a task that retrieves the contents of a URL based on the specified URL request
+object, and calls a handler upon completion. The task bypasses calls to delegate methods for
+response and data delivery, and instead provides any resulting NSData, URLResponse, and
+NSError objects inside the completion handler. Delegate methods for handling authentication
+challenges, however, are still called.</p>
+
+<div class="aside aside-remark">
+    <p class="aside-title">Remark</p>
+    <p>This property is required by the base class.</p>
+
+</div>
+
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <p><a href="https://developer.apple.com/reference/foundation/nsurlsession/1407613-datatask">https://developer.apple.com/reference/foundation/nsurlsession/1407613-datatask</a></p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">dataTask</span><span class="p">(</span>
+        <span class="n">with</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">URLRequest</span><span class="p">,</span>
+        <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">(</span><span class="kt">Data</span><span class="p">?,</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="kt">NSError</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URLSessionDataTask</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-07-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

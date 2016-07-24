@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cassette Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Cassette" class="dashAnchor"></a>
+    <a title="Cassette Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Cassette Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/VCR.html">VCR</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VCR/Error.html">– Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VCR/PlaybackSequence.html">– PlaybackSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/VCR/ReplayCount.html">– ReplayCount</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Cassette.html">Cassette</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Track.html">Track</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Cassette</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Cassette</span></code></pre>
+
+                </div>
+              </div>
+            <p>HTTP interactions are recorded into a <code>Cassette</code> to be replayed later by a <code><a href="../Classes/VCR.html">VCR</a></code> instance.
+A <code>Cassette</code> can be used to store many different HTTP interactions.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV3VHS8CassettecFzT15fixtureWithNameSS_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(fixtureWithName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV3VHS8CassettecFzT15fixtureWithNameSS_S0_">init(fixtureWithName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Attempt to find and load a test fixture with the specified name having a <code>.json</code> extension.</p>
+
+<p>For example, loading a JSON fixture, ignoring any errors, that has the name <q>cassette.json</q>:</p>
+
+<pre class="highlight plaintext"><code>let vhs = try! Cassette(fixtureWithName: "cassette")
+</code></pre>
+
+<p>The <code>vhs</code> value can then be fed into a <code><a href="../Classes/VCR.html">VCR</a></code> instance to replay the stored HTTP
+interactions.</p>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    If the requested fixture cannot be found it throws <code><a href="../Classes/VCR/Error.html#/s:FOC3VHS3VCR5Error7missingFMS1_FT8resourceSS_S1_">VCR.Error.missing</a></code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">fixtureWithName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fixtureWithName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the fixture to find. Without the <code>.json</code> file-extension.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-07-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MatchType Enum Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../../js/jquery.min.js" defer></script>
+    <script src="../../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/MatchType" class="dashAnchor"></a>
+    <a title="MatchType Enum Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../../index.html"> Reference</a>
+        <img id="carat" src="../../../img/carat.png" />
+        MatchType Enum Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../../Classes/VCR.html">VCR</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../../Classes/VCR/Error.html">– Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../../Classes/VCR/PlaybackSequence.html">– PlaybackSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../../Classes/VCR/ReplayCount.html">– ReplayCount</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../../Structs/Cassette.html">Cassette</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../../Structs/Track.html">Track</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MatchType</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">MatchType</span></code></pre>
+
+                </div>
+              </div>
+            <p>A type the defines a property by which a <code><a href="../../../Structs/Track.html">Track</a></code> and <code>URLRequest</code> are compared to see
+if they are a match.</p>
+
+<p>In order to properly replay previously recorded requests, VHS can match HTTP requests to
+a previously recorded one.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FOOC3VHS3VCR16PlaybackSequence9MatchType6methodFMS2_S2_"></a>
+                    <a name="//apple_ref/swift/Element/method" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOOC3VHS3VCR16PlaybackSequence9MatchType6methodFMS2_S2_">method</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The HTTP method (i.e. GET, POST, PUT or DELETE) of the request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">method</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FOOC3VHS3VCR16PlaybackSequence9MatchType3urlFMS2_S2_"></a>
+                    <a name="//apple_ref/swift/Element/url" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOOC3VHS3VCR16PlaybackSequence9MatchType3urlFMS2_S2_">url</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The full URI of the request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">url</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FOOC3VHS3VCR16PlaybackSequence9MatchType4pathFMS2_S2_"></a>
+                    <a name="//apple_ref/swift/Element/path" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOOC3VHS3VCR16PlaybackSequence9MatchType4pathFMS2_S2_">path</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The path of the URI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">path</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FOOC3VHS3VCR16PlaybackSequence9MatchType5queryFMS2_S2_"></a>
+                    <a name="//apple_ref/swift/Element/query" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOOC3VHS3VCR16PlaybackSequence9MatchType5queryFMS2_S2_">query</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The query string values of the URI. The query string ordering does not affect
+matching results (it&rsquo;s order-agnostic).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">query</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FOOC3VHS3VCR16PlaybackSequence9MatchType7headersFMS2_S2_"></a>
+                    <a name="//apple_ref/swift/Element/headers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOOC3VHS3VCR16PlaybackSequence9MatchType7headersFMS2_S2_">headers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The request headers.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">headers</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FOOC3VHS3VCR16PlaybackSequence9MatchType4bodyFMS2_S2_"></a>
+                    <a name="//apple_ref/swift/Element/body" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOOC3VHS3VCR16PlaybackSequence9MatchType4bodyFMS2_S2_">body</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The body of the request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">body</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FOOC3VHS3VCR16PlaybackSequence9MatchType6customFMS2_FT5usingFTVS_5TrackV10Foundation10URLRequest_Sb_S2_"></a>
+                    <a name="//apple_ref/swift/Element/custom" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOOC3VHS3VCR16PlaybackSequence9MatchType6customFMS2_FT5usingFTVS_5TrackV10Foundation10URLRequest_Sb_S2_">custom</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A custom closure or function that can be defined outside of VHS.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter using: A closure that accepts two arguments, a <code><a href="../../../Structs/Track.html">Track</a></code> instance
+and <code>URLRequest</code> instance. If the closure returns <code>true</code> it is assumed that the
+<code><a href="../../../Structs/Track.html">Track</a></code> matches for a given <code>URLRequest</code>. If the closure returns <code>false</code> it is
+assumed that the <code><a href="../../../Structs/Track.html">Track</a></code> does <em>not</em> match for a given <code>URLRequest</code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">custom</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../../../Structs/Track.html">Track</a></span><span class="p">,</span> <span class="kt">URLRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>using</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that accepts two arguments, a <code>Track</code> instance and <code>URLRequest</code> instance. If the closure returns <code>true</code> it is assumed that the <code>Track</code> matches for a given <code>URLRequest</code>. If the closure returns <code>false</code> it is assumed that the <code>Track</code> does  match for a given <code>URLRequest</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-07-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

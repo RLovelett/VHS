@@ -6,7 +6,7 @@
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 //! Project version number for VHS.
 FOUNDATION_EXPORT double VHSVersionNumber;

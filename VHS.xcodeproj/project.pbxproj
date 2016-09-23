@@ -58,6 +58,7 @@
 		941A7C381D44126C00B699B7 /* TrackResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C371D44126C00B699B7 /* TrackResponseTests.swift */; };
 		941A7C3A1D4412B800B699B7 /* VCRSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C391D4412B800B699B7 /* VCRSequenceTests.swift */; };
 		941A7C3C1D44138100B699B7 /* CassetteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C3B1D44138100B699B7 /* CassetteTests.swift */; };
+		948B280E1D94CA6E00B412C4 /* Carthage.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,7 @@
 		941A7C371D44126C00B699B7 /* TrackResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackResponseTests.swift; path = Types/TrackResponseTests.swift; sourceTree = "<group>"; };
 		941A7C391D4412B800B699B7 /* VCRSequenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VCRSequenceTests.swift; path = Types/VCRSequenceTests.swift; sourceTree = "<group>"; };
 		941A7C3B1D44138100B699B7 /* CassetteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CassetteTests.swift; path = Types/CassetteTests.swift; sourceTree = "<group>"; };
+		948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Carthage.xcconfig; path = Resources/Carthage.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				941A7BEC1D44089B00B699B7 /* Argo.framework.dSYM */,
+				948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */,
 				941A7BED1D44089B00B699B7 /* Curry.framework.dSYM */,
 				941A7BCA1D44004800B699B7 /* Info.plist */,
 				941A7BCB1D44004800B699B7 /* VHS.h */,
@@ -434,6 +437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948B280E1D94CA6E00B412C4 /* Carthage.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +521,7 @@
 /* Begin XCBuildConfiguration section */
 		941A7BBE1D43FF1100B699B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -558,6 +563,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos appletvsimulator iphonesimulator watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -567,6 +573,7 @@
 		};
 		941A7BBF1D43FF1100B699B7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -601,6 +608,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos appletvsimulator iphonesimulator watchsimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -668,7 +676,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/VHSTests/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.lovelett.VHSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -686,7 +694,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/VHSTests/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.lovelett.VHSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

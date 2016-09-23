@@ -13,7 +13,7 @@ struct Name : Arbitrary, Equatable, Hashable, CustomStringConvertible {
 	let unName : String
 
 	static var arbitrary : Gen<Name> {
-		let gc : Gen<Character> = Gen<Character>.fromElementsIn("a"..."z")
+		let gc : Gen<Character> = Gen<Character>.fromElements(in: "a"..."z")
 		return gc.map { Name(unName: String($0)) }
 	}
 
@@ -175,7 +175,7 @@ class LambdaSpec : XCTestCase {
 				return a.free.contains(x)
 					==> subst_x_b_a.free == a.free.subtracting([x]).union(b.free)
 			}
-			}.expectFailure
+		}.expectFailure
 
 		property("Substitution of a free variable into a fresh expr is idempotent", arguments: tiny) <- forAll { (a : Exp, x : Name, b : Exp) in
 			return showResult(a.subst(x, b)) { subst_x_b_a in

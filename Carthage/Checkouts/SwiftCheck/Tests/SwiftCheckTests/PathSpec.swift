@@ -14,8 +14,8 @@ struct Path<A : Arbitrary> : Arbitrary {
 
 	private static func pathFrom(_ x : A) -> Gen<[A]> {
 		return Gen.sized { n in
-			return Gen<[A]>.oneOf(
-				[Gen.pure([])] + A.shrink(x).map { pathFrom($0).resize(n - 1) }
+			return Gen<[A]>.one(
+				of: [Gen.pure([])] + A.shrink(x).map { pathFrom($0).resize(n - 1) }
 			).map { [x] + $0 }
 		}
 	}
@@ -52,13 +52,13 @@ struct Extremal<A : Arbitrary & LatticeType> : Arbitrary {
 }
 
 class PathSpec : XCTestCase {
-	private static func smallProp<A : Integer & Arbitrary>(_ pth : Path<A>) -> Bool {
+	private static func smallProp<A : BinaryInteger>(_ pth : Path<A>) -> Bool {
 		return path({ x in
 			return (x >= -100 || -100 >= 0) && x <= 100
 		}, pth)
 	}
 
-	private static func largeProp<A : Integer & Arbitrary>(_ pth : Path<A>) -> Property {
+	private static func largeProp<A : BinaryInteger>(_ pth : Path<A>) -> Property {
 		return somePath({ x in
 			return (x < -1000000 || x > 1000000)
 		}, pth)
@@ -68,25 +68,25 @@ class PathSpec : XCTestCase {
 		property("Int") <- forAll { (x : Path<Int>) in
 			return somePath({ x in
 				return (x < 1000000 || x > -1000000)
-				}, x)
+			}, x)
 		}
 
 		property("Int32") <- forAll { (x : Path<Int32>) in
 			return path({ x in
 				return (x >= -100 || -100 >= 0) && x <= 100
-				}, x)
+			}, x)
 		}
 
 		property("UInt") <- forAll { (x : Path<UInt>) in
 			return somePath({ x in
 				return (x < 1000000 || x > 0)
-				}, x)
+			}, x)
 		}
 
 		property("UInt32") <- forAll { (x : Path<UInt32>) in
 			return path({ x in
 				return (x >= 0 || -100 >= 0) && x <= 100
-				}, x)
+			}, x)
 		}
 
 		property("Large Int") <- forAll { (x : Path<Large<Int>>) in
@@ -104,4 +104,3 @@ class PathSpec : XCTestCase {
 	])
 	#endif
 }
-

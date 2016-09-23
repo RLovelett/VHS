@@ -1,2 +1,2 @@
-github "thoughtbot/Argo" "master"
-github "thoughtbot/Curry" "master"
+github "thoughtbot/Argo" ~> 4.0.0
+github "thoughtbot/Curry" ~> 3.0.0

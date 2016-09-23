@@ -24,3 +24,9 @@ Carthage/Build
 Carthage/Checkouts
 build/
 
+# Python
+*.pyc
+
+# Docker
+.dockerignore
+Dockerfile

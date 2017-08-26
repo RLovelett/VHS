@@ -14,15 +14,15 @@ private func glue(parts: [Gen<String>]) -> Gen<String> {
     return sequence(parts).map { $0.reduce("", +) }
 }
 
-private let lowalpha: Gen<Character> = .fromElementsIn("a"..."z")
-private let upalpha: Gen<Character> = .fromElementsIn("A"..."Z")
-private let digit: Gen<Character> = .fromElementsIn("0"..."9")
-private let alpha: Gen<Character> = .oneOf([lowalpha, upalpha])
-private let alphanum: Gen<Character> = .oneOf([alpha, digit])
-private let mark: Gen<Character> = .fromElementsOf(["-", "_", ".", "!", "~", "*", "'", "(", ")"])
-private let unreserved: Gen<Character> = .oneOf([alphanum, mark])
+private let lowalpha: Gen<Character> = .fromElements(in: "a"..."z")
+private let upalpha: Gen<Character> = .fromElements(in: "A"..."Z")
+private let digit: Gen<Character> = .fromElements(in: "0"..."9")
+private let alpha: Gen<Character> = .one(of: [lowalpha, upalpha])
+private let alphanum: Gen<Character> = .one(of: [alpha, digit])
+private let mark: Gen<Character> = .fromElements(of: ["-", "_", ".", "!", "~", "*", "'", "(", ")"])
+private let unreserved: Gen<Character> = .one(of: [alphanum, mark])
 
-private let schemeGen = Gen<Character>.oneOf([
+private let schemeGen = Gen<Character>.one(of: [
     alpha,
     digit,
     Gen.pure("+"),
@@ -34,7 +34,7 @@ private let schemeGen = Gen<Character>.oneOf([
         $0.unicodeScalars.first.map({ CharacterSet.lowercaseLetters.contains($0) }) ?? false
     })
 
-private let hostname = Gen<Character>.oneOf([
+private let hostname = Gen<Character>.one(of: [
     alphanum,
     Gen.pure("-"),
     ]).proliferateNonEmpty.map({ String.init($0) })
@@ -49,7 +49,7 @@ private let portGen = Gen<Int?>.frequency([
     (3, Int.arbitrary.map({ abs($0) }).map(Optional.some))
 ])
 
-private let pathPartGen: Gen<String> = Gen<Character>.oneOf([
+private let pathPartGen: Gen<String> = Gen<Character>.one(of: [
     alpha,
     Gen.pure("/")
     ]).proliferateNonEmpty

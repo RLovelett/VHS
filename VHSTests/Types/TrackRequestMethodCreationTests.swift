@@ -37,7 +37,7 @@ private let methods: [Track.Request.Method] = [
 
 private let arbitraryVerbs = Gen<String>.frequency([
     (1, String.arbitrary),
-    (3, Gen<Character>.fromElementsOf(verbs))
+    (3, Gen<Character>.fromElements(of: verbs))
 ])
 
 private struct OptionalArbitraryVerb: Arbitrary {

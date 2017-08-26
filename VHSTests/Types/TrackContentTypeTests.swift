@@ -17,7 +17,7 @@ private func glue(parts: [Gen<String>]) -> Gen<String> {
     return sequence(parts).map { $0.reduce("", +) }
 }
 
-private let topTypes = Gen<Character>.fromElementsOf([
+private let topTypes = Gen<Character>.fromElements(of: [
     "application",
     "audio",
     "example",
@@ -28,7 +28,7 @@ private let topTypes = Gen<Character>.fromElementsOf([
     "video"
 ])
 
-private let subTypes = Gen<Character>.fromElementsOf([
+private let subTypes = Gen<Character>.fromElements(of: [
     "x-www-form-urlencoded",
     "form-data",
     "html",
@@ -43,7 +43,7 @@ private let subTypes = Gen<Character>.fromElementsOf([
     "global"
 ])
 
-private let charsets = Gen<Character>.fromElementsOf([
+private let charsets = Gen<Character>.fromElements(of: [
     "UTF-8",
     "UTF-16",
     "UTF-32",

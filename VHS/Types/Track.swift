@@ -149,7 +149,7 @@ extension Track.Request.Method {
 
 // MARK: - Argo Decodable protocol conformance
 
-extension Track : Decodable {
+extension Track : Argo.Decodable {
     /// Attempt to parse the JSON provided into a `Track` type.
     ///
     /// - parameter _: The JSON to parse.
@@ -163,7 +163,7 @@ extension Track : Decodable {
     }
 }
 
-extension Track.Request : Decodable {
+extension Track.Request : Argo.Decodable {
     init(
         from url: URL,
         using method: Method,
@@ -190,7 +190,7 @@ extension Track.Request : Decodable {
     }
 }
 
-extension Track.Response : Decodable {
+extension Track.Response : Argo.Decodable {
     init(
         from url: URL,
         providing code: Int?,
@@ -218,7 +218,7 @@ extension Track.Response : Decodable {
     }
 }
 
-extension Track.Request.Method : Decodable {
+extension Track.Request.Method : Argo.Decodable {
     static func decode(_ json: JSON) -> Decoded<Track.Request.Method> {
         switch json {
         case let .string(s):

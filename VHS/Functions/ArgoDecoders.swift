@@ -36,7 +36,8 @@ func decode(json: JSON) -> Decoded<URL> {
     case .string(let urlString):
         let decodedURL: Decoded<URL>? = URL(string: urlString).map(pure)
         return decodedURL ?? .typeMismatch(expected: "URL", actual: json)
-    default: return .typeMismatch(expected: "URL", actual: json)
+    default:
+        return .typeMismatch(expected: "URL", actual: json)
     }
 }
 
@@ -60,6 +61,7 @@ func decodeHeader(from json: JSON?) -> Decoded<HTTPHeaders?> {
             return .typeMismatch(expected: "[String : String]", actual: json)
         }
         return pure(headers)
-    default: return .typeMismatch(expected: "[String : String]", actual: json)
+    default:
+        return .typeMismatch(expected: "[String : String]", actual: json)
     }
 }

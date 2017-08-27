@@ -5,6 +5,7 @@
 //  Created by Ryan Lovelett on 6/24/16.
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
+// swiftlint:disable force_unwrapping
 
 import Foundation
 import SwiftCheck
@@ -27,7 +28,7 @@ private let schemeGen = Gen<Character>.one(of: [
     digit,
     Gen.pure("+"),
     Gen.pure("-"),
-    Gen.pure(".")
+    Gen.pure("."),
     ]).proliferateNonEmpty
     .map({ String.init($0) })
     .suchThat({
@@ -46,12 +47,12 @@ private let hostGen = glue(parts: [hostname, Gen.pure("."), tld])
 
 private let portGen = Gen<Int?>.frequency([
     (1, Gen<Int?>.pure(nil)),
-    (3, Int.arbitrary.map({ abs($0) }).map(Optional.some))
+    (3, Int.arbitrary.map({ abs($0) }).map(Optional.some)),
 ])
 
 private let pathPartGen: Gen<String> = Gen<Character>.one(of: [
     alpha,
-    Gen.pure("/")
+    Gen.pure("/"),
     ]).proliferateNonEmpty
     .map({ "/" + String.init($0) })
 

@@ -28,7 +28,7 @@ extension Dictionary {
     init<S: Sequence>(_ sequence: S) where S.Iterator.Element == Element {
         self = Dictionary(minimumCapacity: sequence.underestimatedCount)
         for (key, value) in sequence {
-            let _ = self.updateValue(value, forKey: key)
+            _ = self.updateValue(value, forKey: key)
         }
     }
 }

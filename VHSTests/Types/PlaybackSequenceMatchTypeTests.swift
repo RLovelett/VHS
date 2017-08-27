@@ -5,19 +5,21 @@
 //  Created by Ryan Lovelett on 7/17/16.
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
+// swiftlint:disable force_unwrapping
+// swiftlint:disable implicitly_unwrapped_optional
 
 import Argo
-import XCTest
 @testable import VHS
+import XCTest
 
 private let url = URL(string: "http://api.test2.com/this/is/a/path?one=two&three=4")!
 private let baseComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)!
 
 // "8J+RiyBteSBuYW1lIGlzIFJ5YW4=" -> "👋 my name is Ryan"
 private let json = JSON.string("8J+RiyBteSBuYW1lIGlzIFJ5YW4=")
-private let reqHeader = ["username" : "cool"]
+private let reqHeader = ["username": "cool"]
 private let trackRequest = Track.Request(from: url, using: .head, with: reqHeader, sending: json)
-private let resHeader = ["ETag" : "686897696a7c876b7e"]
+private let resHeader = ["ETag": "686897696a7c876b7e"]
 private let trackResponse = Track.Response(from: url, providing: 200, with: resHeader, sending: nil)
 private let track = Track(request: trackRequest, response: trackResponse)
 
@@ -179,7 +181,7 @@ final class PlaybackSequenceMatchTypeHeaderTests: XCTestCase {
     }
 
     func testDifferentHeaders() {
-        self.request.allHTTPHeaderFields = [ "username" : "Cool" ]
+        self.request.allHTTPHeaderFields = [ "username": "Cool" ]
         XCTAssertFalse(self.matcher.match(track, with: self.request))
     }
 

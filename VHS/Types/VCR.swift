@@ -113,7 +113,7 @@ public final class VCR: URLSession {
 
     fileprivate let queue: OperationQueue
 
-    fileprivate let _delegate: URLSessionDelegate?
+    fileprivate weak var _delegate: URLSessionDelegate?
 
     /// Create a `VCR` instance to playback recorded HTTP interactions from a `Cassette`.
     ///
@@ -264,13 +264,15 @@ extension VCR.PlaybackSequence.MatchType {
             switch (thing(from: track.request.url), request.url.flatMap(thing(from:))) {
             case let (.some(trackQueryItems), .some(rquestQueryItems)):
                 return trackQueryItems == rquestQueryItems
-            default: return false
+            default:
+                return false
             }
         case .headers:
             switch (track.request.headers, request.allHTTPHeaderFields) {
             case let (.some(trackHeaders), .some(requestHeaders)):
                 return trackHeaders == requestHeaders
-            default: return false
+            default:
+                return false
             }
         case .body:
             switch (track.request.body, request.httpBody) {
@@ -290,7 +292,7 @@ extension VCR.Error : CustomErrorConvertible {
 
     func userInfo() -> [String : String]? {
         return [
-            NSLocalizedDescriptionKey: "Unable to find match for request."
+            NSLocalizedDescriptionKey: "Unable to find match for request.",
         ]
     }
 
@@ -300,7 +302,7 @@ extension VCR.Error : CustomErrorConvertible {
 
     func code() -> Int {
         switch self {
-        case .recordNotFound(_):
+        case .recordNotFound:
             return 404
         default:
             return 500

@@ -114,7 +114,7 @@ extension Track.ContentType {
             return str.data(using: .utf8)
         case (.string(let str), .base64):
             return Data(base64Encoded: str)
-        case (.object(_), .json):
+        case (.object, .json):
             let obj = body.encode()
             return try? JSONSerialization.data(withJSONObject: obj, options: [])
         default:
@@ -133,16 +133,26 @@ extension Track.Request.Method {
     init(ignoringCase rawValue: String?) {
         let verb = rawValue?.lowercased() ?? "get"
         switch verb {
-        case "options": self = .options
-        case "get": self = .get
-        case "head": self = .head
-        case "post": self = .post
-        case "put": self = .put
-        case "patch": self = .patch
-        case "delete": self = .delete
-        case "trace": self = .trace
-        case "connect": self = .connect
-        default: self = .get
+        case "options":
+            self = .options
+        case "get":
+            self = .get
+        case "head":
+            self = .head
+        case "post":
+            self = .post
+        case "put":
+            self = .put
+        case "patch":
+            self = .patch
+        case "delete":
+            self = .delete
+        case "trace":
+            self = .trace
+        case "connect":
+            self = .connect
+        default:
+            self = .get
         }
     }
 }

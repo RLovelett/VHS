@@ -360,6 +360,7 @@
 				941A7BA91D43FF1100B699B7 /* Headers */,
 				941A7BAA1D43FF1100B699B7 /* Resources */,
 				941A7BEB1D44087800B699B7 /* CopyFiles */,
+				943ED71F1F52401D00CE3867 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -469,6 +470,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		943ED71F1F52401D00CE3867 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		948B28101D94DA0500B412C4 /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

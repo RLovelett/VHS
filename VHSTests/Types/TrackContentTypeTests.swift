@@ -25,7 +25,7 @@ private let topTypes = Gen<Character>.fromElements(of: [
     "message",
     "model",
     "multipart",
-    "video"
+    "video",
 ])
 
 private let subTypes = Gen<Character>.fromElements(of: [
@@ -40,7 +40,7 @@ private let subTypes = Gen<Character>.fromElements(of: [
     "DCD",
     "http",
     "example",
-    "global"
+    "global",
 ])
 
 private let charsets = Gen<Character>.fromElements(of: [
@@ -48,44 +48,44 @@ private let charsets = Gen<Character>.fromElements(of: [
     "UTF-16",
     "UTF-32",
     "ISO-8859-8",
-    "ISO-8859-1"
+    "ISO-8859-1",
 ]).map({ ";charset=\($0)" })
 
 private let slash = Gen.pure("/")
 
 private let arbitraryMimeTypes = Gen<String>.frequency([
     (1, glue(parts: [topTypes, slash, subTypes]).map({ $0.randomizeCase() })),
-    (1, glue(parts: [topTypes, slash, subTypes, charsets]).map({ $0.randomizeCase() }))
+    (1, glue(parts: [topTypes, slash, subTypes, charsets]).map({ $0.randomizeCase() })),
 ])
 
 private let arbitraryTextMimeTypes = Gen<String>.frequency([
     (1, glue(parts: [Gen.pure("text"), slash, subTypes]).map({ $0.randomizeCase() })),
-    (1, glue(parts: [Gen.pure("text"), slash, subTypes, charsets]).map({ $0.randomizeCase() }))
+    (1, glue(parts: [Gen.pure("text"), slash, subTypes, charsets]).map({ $0.randomizeCase() })),
 ])
 
 private let arbitraryJSONMimeTypes = Gen<String>.frequency([
     (1, Gen.pure("application/json").map({ $0.randomizeCase() })),
-    (1, glue(parts: [Gen.pure("application/json"), charsets]).map({ $0.randomizeCase() }))
+    (1, glue(parts: [Gen.pure("application/json"), charsets]).map({ $0.randomizeCase() })),
 ])
 
 private let arbitraryContentType = Gen<String>.pure("Content-Type").map({ $0.randomizeCase() })
 
 /// MARK: - Generating Arbitrary JSON
 
-private let arbitraryBooleanJSON = Gen<JSON>.compose(build: { (c) in JSON.bool(c.generate()) })
+private let arbitraryBooleanJSON = Gen<JSON>.compose(build: { (composer) in JSON.bool(composer.generate()) })
 
-private let arbitraryStringJSON = Gen<JSON>.compose(build: { (c) in
-    let str: String = c.generate()
+private let arbitraryStringJSON = Gen<JSON>.compose(build: { (composer) in
+    let str: String = composer.generate()
     let base64 = (str.data(using: .utf8)?.base64EncodedString())
         ?? "SGVsbG8sIG15IG5hbWUgaXMgUnlhbiBMb3ZlbGV0dA0K"
     return JSON.string(base64)
 })
 
-private let arbitraryObjectJSON = Gen<JSON>.compose(build: { (c) in
+private let arbitraryObjectJSON = Gen<JSON>.compose(build: { (composer) in
     let str = String.arbitrary.suchThat { !$0.isEmpty }
     let dictionary: [ String : JSON ] = [
-        str.generate : JSON.string(c.generate()),
-        str.generate : JSON.bool(c.generate())
+        str.generate: JSON.string(composer.generate()),
+        str.generate: JSON.bool(composer.generate()),
     ]
     return JSON.object(dictionary)
 })
@@ -94,12 +94,12 @@ private let arbitraryJSON = Gen<JSON>.frequency([
     (1, Gen.pure(JSON.null)),
     (1, arbitraryBooleanJSON),
     (2, arbitraryStringJSON),
-    (2, arbitraryObjectJSON)
+    (2, arbitraryObjectJSON),
 ])
 
 extension JSON : Arbitrary {
-    public static var arbitrary: Gen<JSON> = Gen<JSON>.compose { c in
-        return JSON.bool(c.generate())
+    public static var arbitrary: Gen<JSON> = Gen<JSON>.compose { composer in
+        return JSON.bool(composer.generate())
     }
 }
 
@@ -108,11 +108,11 @@ final class TrackContentTypeTests: XCTestCase {
     func testTextBasedContentTypes() {
         property("Generated content types based on text.") <- forAll(arbitraryContentType, arbitraryTextMimeTypes, arbitraryJSON) { (contentType, mimeType, data) in
             // swiftlint:disable:previous line_length
-            let header = [ contentType : mimeType ]
+            let header = [ contentType: mimeType ]
             let type = Track.ContentType(from: header)
 
             switch data {
-            case .string(_):
+            case .string:
                 return type == .text && type.decode(body: data) != nil
             default:
                 return type == .text && type.decode(body: data) == nil
@@ -123,7 +123,7 @@ final class TrackContentTypeTests: XCTestCase {
     func testJSONBasedContentTypes() {
         property("Generated content types based on JSON.") <- forAll(arbitraryContentType, arbitraryJSONMimeTypes, arbitraryObjectJSON) { (contentType, mimeType, data) in
             // swiftlint:disable:previous line_length
-            let header = [ contentType : mimeType ]
+            let header = [ contentType: mimeType ]
             let type = Track.ContentType(from: header)
 
             switch data {
@@ -136,11 +136,11 @@ final class TrackContentTypeTests: XCTestCase {
     func testBase64ContentTypes() {
         property("Unmatched content types are base64 encoded.") <- forAll(arbitraryContentType, arbitraryMimeTypes, arbitraryJSON) { (contentType, mimeType, data) in
             // swiftlint:disable:previous line_length
-            let header = [ contentType : mimeType ]
+            let header = [ contentType: mimeType ]
             let type = Track.ContentType(from: header)
 
             switch data {
-            case .string(_):
+            case .string:
                 return type == .base64 && type.decode(body: data) != nil
             default:
                 return type == .base64 && type.decode(body: data) == nil

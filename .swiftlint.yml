@@ -2,8 +2,18 @@ included:
     - VHS
     - VHSTests
 disabled_rules:
-   - nesting
-   - todo
-   - conditional_binding_cascade
+  - nesting
+  - todo
+  - conditional_binding_cascade
 opt_in_rules:
-    - empty_count
+  - closure_end_indentation
+  - closure_parameter_position
+  - closure_spacing
+  - empty_count
+  - first_where
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - sorted_imports
+  - switch_case_on_newline
+trailing_comma:
+  mandatory_comma: true

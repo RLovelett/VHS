@@ -28,7 +28,7 @@ public struct Cassette {
     ///   file-extension.
     /// - throws: If the requested fixture cannot be found it throws `VCR.Error.missing`
     public init(fixtureWithName name: String) throws {
-        let bundle = Bundle.allBundles.filter() { $0.bundlePath.hasSuffix(".xctest") }.first
+        let bundle = Bundle.allBundles.first(where: { $0.bundlePath.hasSuffix(".xctest") })
         guard let resource = bundle?.url(forResource: name, withExtension: "json")
             else { throw VCR.Error.missing(resource: name + ".json") }
         try self.init(contentsOf: resource)
@@ -46,7 +46,7 @@ public struct Cassette {
         switch decodedTracks {
         case .success(let tracks):
             self.tracks = tracks
-        case .failure(_):
+        case .failure:
             throw VCR.Error.invalidFormat(resource: fixture.description)
         }
     }

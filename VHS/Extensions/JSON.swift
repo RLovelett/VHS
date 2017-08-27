@@ -13,7 +13,7 @@ extension JSON {
     func encode() -> Any {
         switch self {
         case .object(let dictionary):
-            var accum = Dictionary<String, Any>(minimumCapacity: dictionary.count)
+            var accum: [String : Any] = Dictionary(minimumCapacity: dictionary.count)
             for (key, value) in dictionary {
                 accum[key] = value.encode()
             }

@@ -19,7 +19,7 @@ private let verbs = [
     "patch",
     "delete",
     "trace",
-    "connect"
+    "connect",
 ].flatMap { (verb) in
     (0..<100).map({ _ in verb.randomizeCase() })
 }
@@ -32,12 +32,12 @@ private let methods: [Track.Request.Method] = [
     .patch,
     .delete,
     .trace,
-    .connect
+    .connect,
 ]
 
 private let arbitraryVerbs = Gen<String>.frequency([
     (1, String.arbitrary),
-    (3, Gen<Character>.fromElements(of: verbs))
+    (3, Gen<Character>.fromElements(of: verbs)),
 ])
 
 private struct OptionalArbitraryVerb: Arbitrary {
@@ -46,7 +46,7 @@ private struct OptionalArbitraryVerb: Arbitrary {
     static var arbitrary: Gen<OptionalArbitraryVerb> {
         let optionalVerbs = Gen<String?>.frequency([
             (1, Gen<String?>.pure(nil)),
-            (3, arbitraryVerbs.map(Optional.some))
+            (3, arbitraryVerbs.map(Optional.some)),
         ])
 
         return optionalVerbs.map(OptionalArbitraryVerb.init)
@@ -57,11 +57,11 @@ private let arbitraryBooleanJSON: Gen<JSON> = Bool.arbitrary.map(JSON.bool)
 
 private let arbitraryStringJSON: Gen<JSON> = arbitraryVerbs.map(JSON.string)
 
-private let arbitraryObjectJSON: Gen<JSON> = Gen<JSON>.compose(build: { (c) in
+private let arbitraryObjectJSON: Gen<JSON> = Gen<JSON>.compose(build: { (composer) in
     let str = String.arbitrary.suchThat { !$0.isEmpty }
     let dictionary: [ String : JSON ] = [
-        str.generate : JSON.string(c.generate()),
-        str.generate : JSON.bool(c.generate())
+        str.generate: JSON.string(composer.generate()),
+        str.generate: JSON.bool(composer.generate()),
     ]
     return JSON.object(dictionary)
 })
@@ -70,7 +70,7 @@ private let arbitraryJSON: Gen<JSON> = Gen<JSON>.frequency([
     (1, Gen.pure(JSON.null)),
     (1, arbitraryBooleanJSON),
     (2, arbitraryStringJSON),
-    (2, arbitraryObjectJSON)
+    (2, arbitraryObjectJSON),
 ])
 
 final class TrackRequestMethodCreationTests: XCTestCase {
@@ -98,11 +98,12 @@ final class TrackRequestMethodCreationTests: XCTestCase {
         property("Create request method from JSON.String") <- forAll(arbitraryJSON) { (json) in
             let result = Track.Request.Method.decode(json)
             switch (json, result) {
-            case (.string(_), .success(_)):
+            case (.string, .success):
                 return true
-            case (_, .failure(_)):
+            case (_, .failure):
                 return true
-            default: return false
+            default:
+                return false
             }
         }
     }

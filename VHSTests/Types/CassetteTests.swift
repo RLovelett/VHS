@@ -6,14 +6,14 @@
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
 
-import XCTest
 @testable import VHS
+import XCTest
 
 final class CassetteTests: XCTestCase {
 
     func testMissingFixture() {
         do {
-            let _ = try Cassette(fixtureWithName: "🏅👻🍻")
+            _ = try Cassette(fixtureWithName: "🏅👻🍻")
         } catch VCR.Error.missing(let name) {
             XCTAssertEqual(name, "🏅👻🍻.json")
         } catch let error as NSError {
@@ -23,7 +23,7 @@ final class CassetteTests: XCTestCase {
 
     func testMalformedFixture() {
         do {
-            let _ = try Cassette(fixtureWithName: "dvr_multiple")
+            _ = try Cassette(fixtureWithName: "dvr_multiple")
         } catch VCR.Error.invalidFormat(let name) {
             XCTAssertTrue(name.contains("dvr_multiple.json"))
         } catch let error as NSError {

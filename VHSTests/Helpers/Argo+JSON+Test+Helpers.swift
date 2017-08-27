@@ -11,7 +11,7 @@ import Foundation
 
 // Idea taken from Venmo/DVR/Vinyl (thanks!)
 private func testingBundle() -> Bundle? {
-    let bundleArray = Bundle.allBundles.filter() { $0.bundlePath.hasSuffix(".xctest") }
+    let bundleArray = Bundle.allBundles.filter { $0.bundlePath.hasSuffix(".xctest") }
     guard bundleArray.count == 1 else { return nil }
     return bundleArray.first
 }

@@ -12,7 +12,7 @@ private func generate() -> AnyIterator<Int> {
     var current = 0
 
     return AnyIterator<Int> {
-        current = current + 1
+        current += 1
         return current
     }
 }
@@ -29,7 +29,7 @@ final class VCRTask: URLSessionDataTask {
 
     private let callback: VCRTaskCallback?
 
-    internal var delegate: URLSessionDataDelegate?
+    internal weak var delegate: URLSessionDataDelegate?
 
     internal lazy var queue: OperationQueue = {
         let q = OperationQueue()
@@ -76,7 +76,7 @@ final class VCRTask: URLSessionDataTask {
 
         // Delegate Message #1
         if let response = _response {
-            self.queue.addOperation() {
+            self.queue.addOperation {
                 let session = URLSession()
                 self.delegate?.urlSession?(session, dataTask: self, didReceive: response) { (_) in }
             }
@@ -84,14 +84,14 @@ final class VCRTask: URLSessionDataTask {
 
         // Delegate Message #2
         if let data = self.recordedResponse?.body {
-            self.queue.addOperation() {
+            self.queue.addOperation {
                 let session = URLSession()
                 self.delegate?.urlSession?(session, dataTask: self, didReceive: data)
             }
         }
 
         // Delegate Message #3
-        self.queue.addOperation() {
+        self.queue.addOperation {
             let session = URLSession()
             self.delegate?.urlSession?(session, task: self, didCompleteWithError: self.error)
             self.callback?(self.recordedResponse?.body, self.response, self.error)
@@ -118,12 +118,12 @@ final class VCRTask: URLSessionDataTask {
         return request
     }
 
-    private var _response: URLResponse? = nil
+    private var _response: URLResponse?
     override var response: URLResponse? {
         return _response
     }
 
-    private let _taskIdentifier: Int = sharedSequence.next()!
+    private let _taskIdentifier: Int = sharedSequence.next() ?? 0
     override var taskIdentifier: Int {
         return _taskIdentifier
     }

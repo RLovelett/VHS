@@ -12,7 +12,7 @@ import XCTest
 final class ExpectResponseFromDelegate: NSObject, URLSessionDataDelegate {
 
     enum QueueType {
-        case DefaultQueue, MainQueue
+        case `default`, main
     }
 
     private let type: QueueType
@@ -31,9 +31,9 @@ final class ExpectResponseFromDelegate: NSObject, URLSessionDataDelegate {
         didCompleteWithError error: Error?
     ) {
         switch self.type {
-        case .DefaultQueue:
+        case .default:
             XCTAssertFalse(Thread.isMainThread)
-        case .MainQueue:
+        case .main:
             XCTAssertTrue(Thread.isMainThread)
         }
 

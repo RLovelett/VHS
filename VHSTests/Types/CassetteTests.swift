@@ -12,22 +12,14 @@ import XCTest
 final class CassetteTests: XCTestCase {
 
     func testMissingFixture() {
-        do {
-            _ = try Cassette(fixtureWithName: "🏅👻🍻")
-        } catch VCR.Error.missing(let name) {
-            XCTAssertEqual(name, "🏅👻🍻.json")
-        } catch let error as NSError {
-            XCTFail(error.description)
+        XCTAssertThrowsError(try Cassette(fixtureWithName: "🏅👻🍻")) { error in
+            XCTAssertEqual(error as? VCR.Error, .missing(resource: "🏅👻🍻.json"))
         }
     }
 
     func testMalformedFixture() {
-        do {
-            _ = try Cassette(fixtureWithName: "dvr_multiple")
-        } catch VCR.Error.invalidFormat(let name) {
-            XCTAssertTrue(name.contains("dvr_multiple.json"))
-        } catch let error as NSError {
-            XCTFail(error.description)
+        XCTAssertThrowsError(try Cassette(fixtureWithName: "dvr_multiple")) { error in
+            XCTAssertEqual(error as? VCR.Error, .invalidFormat(resource: "dvr_multiple.json"))
         }
     }
 

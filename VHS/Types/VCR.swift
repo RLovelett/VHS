@@ -258,22 +258,22 @@ extension VCR.PlaybackSequence.MatchType {
             return track.request.url.path == request.url?.path
         case .query:
             switch (thing(from: track.request.url), request.url.flatMap(thing(from:))) {
-            case let (.some(trackQueryItems), .some(rquestQueryItems)):
+            case (let trackQueryItems?, let rquestQueryItems?):
                 return trackQueryItems == rquestQueryItems
             default:
                 return false
             }
         case .headers:
             switch (track.request.headers, request.allHTTPHeaderFields) {
-            case let (.some(trackHeaders), .some(requestHeaders)):
+            case (let trackHeaders?, let requestHeaders?):
                 return trackHeaders == requestHeaders
             default:
                 return false
             }
         case .body:
-            switch (track.request.body, request.httpBody) {
-            case let (.some(trackBody), .some(requestBody)):
-                return NSData(data: trackBody).isEqual(to: requestBody)
+            switch (track.request.body?.data, request.httpBody) {
+            case (let trackBody?, let requestBody?):
+                return trackBody == requestBody
             default:
                 return false
             }
@@ -305,4 +305,18 @@ extension VCR.Error : CustomErrorConvertible {
         }
     }
 
+}
+
+extension VCR.Error: Equatable {
+    public static func == (lhs: VCR.Error, rhs: VCR.Error) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidFormat(let lhs), .invalidFormat(let rhs)),
+             (.missing(let lhs), .missing(let rhs)):
+            return lhs == rhs
+        case (.recordNotFound(let lhs), .recordNotFound(let rhs)):
+            return lhs == rhs
+        default:
+            return false
+        }
+    }
 }

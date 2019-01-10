@@ -74,19 +74,19 @@ final class VCRIntegrationTests: XCTestCase {
     // MARK: - Test the tasks
 
     func testTaskProperties() {
-        let t = VCR(play: self.multipleTracks)
+        let t = VCR(play: multipleTracks)
 
-        let firstTask = t.dataTask(with: self.url)
+        let firstTask = t.dataTask(with: url)
         XCTAssertEqual(firstTask.state, .suspended)
         XCTAssertNotNil(firstTask.originalRequest)
         XCTAssertNotNil(firstTask.currentRequest)
 
-        let secondTask = t.dataTask(with: self.url)
+        let secondTask = t.dataTask(with: url)
         XCTAssertEqual(secondTask.state, .suspended)
         XCTAssertNotNil(secondTask.originalRequest)
         XCTAssertNotNil(secondTask.currentRequest)
 
-        let thirdTask = t.dataTask(with: self.url)
+        let thirdTask = t.dataTask(with: url)
         XCTAssertEqual(thirdTask.state, .suspended)
         XCTAssertNotNil(thirdTask.originalRequest)
         XCTAssertNotNil(thirdTask.currentRequest)
@@ -110,128 +110,137 @@ final class VCRIntegrationTests: XCTestCase {
     // MARK: - Testing the asynchronous callbacks
 
     func testCallbackOnDefaultQueue() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        let t = VCR(play: self.multipleTracks)
-        let task = t.dataTask(with: self.url) { (_, _, _) in
+        let t = VCR(play: multipleTracks)
+        let task = t.dataTask(with: url) { (_, _, _) in
             XCTAssertFalse(Thread.isMainThread)
-            expectation.fulfill()
+            dataTaskExpectation.fulfill()
         }
 
         task.resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testCallbackOnMainQueue() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        let t = VCR(play: self.multipleTracks, in: OperationQueue.main)
-        let task = t.dataTask(with: self.url) { (_, _, _) in
+        let t = VCR(play: multipleTracks, in: OperationQueue.main)
+        let task = t.dataTask(with: url) { (_, _, _) in
             XCTAssertTrue(Thread.isMainThread)
-            expectation.fulfill()
+            dataTaskExpectation.fulfill()
         }
 
         task.resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testNoCallbackWithoutCallingResume() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        let t = VCR(play: self.multipleTracks, match: .cassetteOrder, replay: .none)
-        _ = t.dataTask(with: self.url) { (_, _, _) in
+        let t = VCR(play: multipleTracks, match: .cassetteOrder, replay: .none)
+        _ = t.dataTask(with: url) { (_, _, _) in
             XCTFail("This never should respond")
         }
 
         let good = t.dataTask(with: url) { (_, response, _) in
             XCTAssertNotNil(response)
-            expectation.fulfill()
+            dataTaskExpectation.fulfill()
         }
 
         good.resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testCallbackFromURL() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        VCR(play: self.multipleTracks)
-            .dataTask(with: self.url, completionHandler: firstTrackResponseValidation(expectation))
+        VCR(play: multipleTracks)
+            .dataTask(with: url, completionHandler: firstTrackResponseValidation(dataTaskExpectation))
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testCallbackUnlimitedPlaybackFromURL() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        VCR(play: self.multipleTracks, replay: .unlimited)
-            .dataTask(with: self.url, completionHandler: firstTrackResponseValidation(expectation))
+        VCR(play: multipleTracks, replay: .unlimited)
+            .dataTask(with: url, completionHandler: firstTrackResponseValidation(dataTaskExpectation))
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testCallbackFromUnmatchedURL() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
         let url = URL(string: "http://api.test3.com")!
-        VCR(play: self.multipleTracks, match: .properties(matching: [.url]))
-            .dataTask(with: url, completionHandler: unmatchedTrackErrorValidation(expectation))
+        VCR(play: multipleTracks, match: .properties(matching: [.url]))
+            .dataTask(with: url, completionHandler: unmatchedTrackErrorValidation(dataTaskExpectation))
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     // MARK: - Testing the asynchronous delegate
 
-    var delegate: URLSessionDataDelegate!
-
     func testDelegatekOnDefaultQueue() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        delegate = ExpectResponseFromDelegate(on: .default, fulfill: expectation)
-        VCR(play: self.multipleTracks, notify: delegate)
-            .dataTask(with: self.url)
+        let delegate = ExpectResponseFromDelegate(on: .default, fulfill: dataTaskExpectation)
+        VCR(play: multipleTracks, notify: delegate)
+            .dataTask(with: url)
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testDelegateOnMainQueue() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        delegate = ExpectResponseFromDelegate(on: .main, fulfill: expectation)
-        VCR(play: self.multipleTracks, in: OperationQueue.main, notify: delegate)
-            .dataTask(with: self.url)
+        let delegate = ExpectResponseFromDelegate(on: .main, fulfill: dataTaskExpectation)
+        VCR(play: multipleTracks, in: OperationQueue.main, notify: delegate)
+            .dataTask(with: url)
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testDelegateFromURL() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        delegate = CurryDelegateAsCallback(firstTrackResponseValidation(expectation))
-        VCR(play: self.multipleTracks, notify: delegate)
-            .dataTask(with: self.url)
+        let delegate = CurryDelegateAsCallback(firstTrackResponseValidation(dataTaskExpectation))
+        VCR(play: multipleTracks, notify: delegate)
+            .dataTask(with: url)
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testDelegateUnlimitedPlaybackFromURL() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        delegate = CurryDelegateAsCallback(firstTrackResponseValidation(expectation))
-        VCR(play: self.multipleTracks, replay: .unlimited, notify: delegate)
-            .dataTask(with: self.url)
+        let delegate = CurryDelegateAsCallback(firstTrackResponseValidation(dataTaskExpectation))
+        VCR(play: multipleTracks, replay: .unlimited, notify: delegate)
+            .dataTask(with: url)
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
     func testDelegateFromUnmatchedURL() throws {
-        let expectation = self.expectation(description: #function)
-        defer { self.waitForExpectations(timeout: 2.0, handler: nil) }
+        let dataTaskExpectation = expectation(description: #function)
 
-        delegate = CurryDelegateAsCallback(unmatchedTrackErrorValidation(expectation))
-        VCR(play: self.multipleTracks, match: .properties(matching: [.url]), notify: delegate)
+        let delegate = CurryDelegateAsCallback(unmatchedTrackErrorValidation(dataTaskExpectation))
+        VCR(play: multipleTracks, match: .properties(matching: [.url]), notify: delegate)
             .dataTask(with: URL(string: "http://api.test3.com")!)
             .resume()
+
+        waitForExpectations(timeout: 2.0, handler: nil)
     }
 
 }

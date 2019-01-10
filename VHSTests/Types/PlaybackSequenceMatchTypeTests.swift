@@ -6,19 +6,19 @@
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
 
-import Argo
 @testable import VHS
 import XCTest
 
 private let url = URL(string: "http://api.test2.com/this/is/a/path?one=two&three=4")!
 private let baseComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+private let mismatchURL = URL(string: "https://api.test.com")!
 
 // "8J+RiyBteSBuYW1lIGlzIFJ5YW4=" -> "👋 my name is Ryan"
-private let json = JSON.string("8J+RiyBteSBuYW1lIGlzIFJ5YW4=")
+private let json = Body(MockBody("👋 my name is Ryan"))
 private let reqHeader = ["username": "cool"]
-private let trackRequest = Track.Request(from: url, using: .head, with: reqHeader, sending: json)
+private let trackRequest = Track.Request(url: url, method: .head, headers: reqHeader, body: json)
 private let resHeader = ["ETag": "686897696a7c876b7e"]
-private let trackResponse = Track.Response(from: url, providing: 200, with: resHeader, sending: nil)
+private let trackResponse = Track.Response(url: url, statusCode: 200, headers: reqHeader, error: nil, body: nil)
 private let track = Track(request: trackRequest, response: trackResponse)
 
 // MARK: - Test matching by HTTP method (or verb)
@@ -31,7 +31,7 @@ final class PlaybackSequenceMatchTypeMethodTests: XCTestCase {
         super.setUp()
         // Put setup code here.
         // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: URL.arbitrary.generate)
+        self.request = URLRequest(url: url)
         self.request.httpMethod = "Head"
     }
 
@@ -64,7 +64,7 @@ final class PlaybackSequenceMatchTypeURLTests: XCTestCase {
     }
 
     func testPurposelyMismatched() {
-        self.request.url = URLComponents.arbitrary.generate.url
+        self.request.url = mismatchURL
         XCTAssertFalse(VCR.PlaybackSequence.MatchType.url.match(track, with: self.request))
     }
 
@@ -82,7 +82,7 @@ final class PlaybackSequenceMatchTypePathTests: XCTestCase {
         super.setUp()
         // Put setup code here.
         // This method is called before the invocation of each test method in the class.
-        self.components = URLComponents.arbitrary.generate
+        self.components = URLComponents(url: mismatchURL, resolvingAgainstBaseURL: false)
         self.components.path = baseComponents.path
         self.request = self.components.url.flatMap({ URLRequest(url: $0) })
     }
@@ -123,7 +123,7 @@ final class PlaybackSequenceMatchTypeQueryTests: XCTestCase {
         super.setUp()
         // Put setup code here.
         // This method is called before the invocation of each test method in the class.
-        self.components = URLComponents.arbitrary.generate
+        self.components = URLComponents(url: mismatchURL, resolvingAgainstBaseURL: false)
         self.components.queryItems = baseComponents.queryItems
         self.request = self.components.url.flatMap({ URLRequest(url: $0) })
     }
@@ -164,7 +164,7 @@ final class PlaybackSequenceMatchTypeHeaderTests: XCTestCase {
         super.setUp()
         // Put setup code here.
         // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: URL.arbitrary.generate)
+        self.request = URLRequest(url: mismatchURL)
         self.request.allHTTPHeaderFields = trackRequest.headers
     }
 
@@ -173,7 +173,7 @@ final class PlaybackSequenceMatchTypeHeaderTests: XCTestCase {
     }
 
     func testRequestWithoutHeaders() {
-        let trackRequest = Track.Request(from: url, using: .head, with: .none, sending: json)
+        let trackRequest = Track.Request(url: url, method: .head, headers: nil, body: json)
         let track = Track(request: trackRequest, response: trackResponse)
         XCTAssertFalse(self.matcher.match(track, with: self.request))
     }
@@ -195,7 +195,7 @@ final class PlaybackSequenceMatchTypeBodyTests: XCTestCase {
         super.setUp()
         // Put setup code here.
         // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: URL.arbitrary.generate)
+        self.request = URLRequest(url: mismatchURL)
         self.request.httpBody = Data(base64Encoded: "8J+RiyBteSBuYW1lIGlzIFJ5YW4=")
     }
 
@@ -204,7 +204,7 @@ final class PlaybackSequenceMatchTypeBodyTests: XCTestCase {
     }
 
     func testRequestWithoutBody() {
-        let trackRequest = Track.Request(from: url, using: .head, with: reqHeader, sending: nil)
+        let trackRequest = Track.Request(url: url, method: .head, headers: reqHeader, body: nil)
         let track = Track(request: trackRequest, response: trackResponse)
         XCTAssertFalse(VCR.PlaybackSequence.MatchType.body.match(track, with: self.request))
     }
@@ -230,7 +230,7 @@ final class PlaybackSequenceMatchTypeCustomTests: XCTestCase {
         super.setUp()
         // Put setup code here.
         // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: URL.arbitrary.generate)
+        self.request = URLRequest(url: mismatchURL)
     }
 
     func testMatchingCustomFunction() {

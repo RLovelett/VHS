@@ -8,16 +8,7 @@
 
 import Foundation
 
-private func generate() -> AnyIterator<Int> {
-    var current = 0
-
-    return AnyIterator<Int> {
-        current += 1
-        return current
-    }
-}
-
-private let sharedSequence: AnyIterator<Int> = generate()
+private var sharedSequence = sequence(first: 0, next: { $0 + 1 })
 
 typealias VCRTaskCallback = (Data?, URLResponse?, Error?) -> Void
 
@@ -48,6 +39,7 @@ final class VCRTask: URLSessionDataTask {
         self.request = request
         self.callback = callback
         self.delegate = delegate
+        self._taskIdentifier = sharedSequence.next()
         super.init()
     }
 
@@ -62,6 +54,7 @@ final class VCRTask: URLSessionDataTask {
         self.request = request
         self.callback = callback
         self.delegate = delegate
+        self._taskIdentifier = sharedSequence.next()
         super.init()
     }
 
@@ -83,7 +76,7 @@ final class VCRTask: URLSessionDataTask {
         }
 
         // Delegate Message #2
-        if let data = self.recordedResponse?.body {
+        if let data = self.recordedResponse?.body?.data {
             self.queue.addOperation {
                 let session = URLSession()
                 self.delegate?.urlSession?(session, dataTask: self, didReceive: data)
@@ -94,7 +87,7 @@ final class VCRTask: URLSessionDataTask {
         self.queue.addOperation {
             let session = URLSession()
             self.delegate?.urlSession?(session, task: self, didCompleteWithError: self.error)
-            self.callback?(self.recordedResponse?.body, self.response, self.error)
+            self.callback?(self.recordedResponse?.body?.data, self.response, self.error)
         }
 
         _state = .completed
@@ -123,9 +116,9 @@ final class VCRTask: URLSessionDataTask {
         return _response
     }
 
-    private let _taskIdentifier: Int = sharedSequence.next() ?? 0
+    private let _taskIdentifier: Int?
     override var taskIdentifier: Int {
-        return _taskIdentifier
+        return _taskIdentifier!
     }
 
     private let _error: Error?

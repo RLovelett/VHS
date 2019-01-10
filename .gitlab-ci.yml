@@ -1,0 +1,86 @@
+---
+stages:
+  - test
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  XCODE_TARGET: VHS
+  XCODE_SCHEME: VHS
+  XCODE_PROJECT: VHS.xcodeproj
+  PRODUCT: Debug-iphonesimulator
+
+.test_template: &test_definition
+  stage: test
+  before_script:
+    - xcrun simctl list
+  script:
+    - echo "Testing on $DESTINATION"
+    - echo "Testing using scheme $XCODE_SCHEME"
+    - >
+      set -o pipefail &&
+      xcodebuild
+      -derivedDataPath "$PWD/derivedData"
+      -enableCodeCoverage YES
+      -scheme "$XCODE_SCHEME"
+      -project "$XCODE_PROJECT"
+      -destination "$DESTINATION"
+      build-for-testing | xcpretty
+    - >
+      set -o pipefail &&
+      xcodebuild
+      -derivedDataPath "$PWD/derivedData"
+      -enableCodeCoverage YES
+      -destination "$DESTINATION"
+      -xctestrun derivedData/Build/Products/*.xctestrun
+      test-without-building | xcpretty --report junit
+    - >
+      xcrun llvm-cov report
+      -instr-profile derivedData/Build/ProfileData/*/Coverage.profdata
+      "derivedData/Build/Products/${PRODUCT}/${XCODE_TARGET%%-*}.framework/${XCODE_TARGET%%-*}"
+  coverage: '/(\d+\.\d+)%\z/'
+  artifacts:
+    reports:
+      junit: build/reports/junit.xml
+  only:
+    - merge_requests
+
+iOS_10_3_x:
+  <<: *test_definition
+  variables:
+    DESTINATION: platform=iOS Simulator,name=iPad Pro (9.7 inch),OS=10.3.1
+  tags:
+    - swift-4.2
+    - iOS-10.3.1
+
+iOS_11_4_x:
+  <<: *test_definition
+  variables:
+    DESTINATION: platform=iOS Simulator,name=iPad Pro (9.7-inch),OS=11.4
+  tags:
+    - swift-4.2
+    - iOS-11.4
+
+iOS_12_0_x:
+  <<: *test_definition
+  variables:
+    DESTINATION: platform=iOS Simulator,name=iPad Pro (9.7-inch),OS=12.0
+  tags:
+    - swift-4.2
+    - iOS-12.0
+
+tvOS_12_0_x:
+  <<: *test_definition
+  variables:
+    DESTINATION: platform=tvOS Simulator,name=Apple TV 4K,OS=12.0
+    PRODUCT: Debug-appletvsimulator
+  tags:
+    - swift-4.2
+    - tvOS-12.0
+
+macOS:
+  <<: *test_definition
+  variables:
+    DESTINATION: platform=OS X,arch=x86_64
+    PRODUCT: Debug
+  tags:
+    - swift-4.2

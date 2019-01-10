@@ -6,9 +6,6 @@
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
 
-import Argo
-import Foundation
-
 /// HTTP interactions are recorded into a `Cassette` to be replayed later by a `VCR` instance.
 /// A `Cassette` can be used to store many different HTTP interactions.
 public struct Cassette {
@@ -40,14 +37,10 @@ public struct Cassette {
     /// - throws: If the fixture is malformed the function throws an `VCR.Error.invalidFormat`
     init(contentsOf fixture: URL) throws {
         let data = try Data(contentsOf: fixture)
-        let foundationJSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        let json = JSON(foundationJSON)
-        let decodedTracks: Decoded<[Track]> = decodeArray(json)
-        switch decodedTracks {
-        case .success(let tracks):
-            self.tracks = tracks
-        case .failure:
-            throw VCR.Error.invalidFormat(resource: fixture.description)
+        do {
+            tracks = try JSONDecoder().decode([Track].self, from: data)
+        } catch {
+            throw VCR.Error.invalidFormat(resource: fixture.lastPathComponent)
         }
     }
 

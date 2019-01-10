@@ -14,9 +14,7 @@ import Foundation
 /// The class extends [`URLSession`](https://developer.apple.com/reference/foundation/nsurlsession).
 ///
 /// - SeeAlso: [Using NSURLSession](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html)
-// swiftlint:disable:previous line_length
 /// - SeeAlso: [About the URL Loading System](https://developer.apple.com/library/prerelease/content/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i)
-// swiftlint:disable:previous line_length
 public final class VCR: URLSession {
 
     /// A set of errors that may be encountered at run-time when interacting with a recored HTTP
@@ -250,8 +248,6 @@ private func thing(from url: URL) -> [URLQueryItem]? {
 
 extension VCR.PlaybackSequence.MatchType {
 
-    // TODO: Reduce the cyclomatic complexity of this function below 10
-    // swiftlint:disable:next cyclomatic_complexity
     func match(_ track: Track, with request: URLRequest) -> Bool {
         switch self {
         case .method:

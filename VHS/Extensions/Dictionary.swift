@@ -24,7 +24,6 @@ extension Dictionary {
     ///   code-coverage amount without having to add and maintain a test.
     ///
     /// - SeeAlso: [SE-100: Add sequence-based initializers and merge methods to Dictionary](https://github.com/apple/swift-evolution/blob/8f53b7f467d4ebee6891577311ca70715b4c9834/proposals/0100-add-sequence-based-init-and-merge-to-dictionary.md)
-    // swiftlint:disable:previous line_length
     init<S: Sequence>(_ sequence: S) where S.Iterator.Element == Element {
         self = Dictionary(minimumCapacity: sequence.underestimatedCount)
         for (key, value) in sequence {

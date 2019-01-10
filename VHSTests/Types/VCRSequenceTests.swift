@@ -5,8 +5,6 @@
 //  Created by Ryan Lovelett on 12/02/2016.
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
-// swiftlint:disable implicitly_unwrapped_optional
 
 import Foundation
 @testable import VHS

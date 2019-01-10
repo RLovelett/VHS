@@ -79,7 +79,6 @@ final class TrackRequestMethodCreationTests: XCTestCase {
     /// verbs with random case noise applied to their characters.
     func testValidMethods() {
         property("Create request method from arbitrary HTTP verb `String?`") <- forAll { (aVerb: OptionalArbitraryVerb) in
-            // swiftlint:disable:previous line_length
             let optionalVerb = aVerb.verb
             let method = Track.Request.Method(ignoringCase: optionalVerb)
             if let verb = optionalVerb, verbs.contains(verb) {

@@ -5,7 +5,6 @@
 //  Created by Ryan Lovelett on 6/24/16.
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
 
 import Foundation
 import SwiftCheck

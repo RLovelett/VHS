@@ -32,7 +32,6 @@ public struct Track {
 
         /// A `Track.Request.Method` represents a set of possible HTTP verbs.
         /// - seealso: [Hypertext Transfer Protocol -- HTTP/1.1 - Method Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
-        // swiftlint:disable:previous line_length
         enum Method {
             case options, get, head, post, put, patch, delete, trace, connect
         }

@@ -5,9 +5,6 @@
 //  Created by Ryan Lovelett on 7/18/16.
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
-// swiftlint:disable implicitly_unwrapped_optional
-// swiftlint:disable weak_delegate
 
 import VHS
 import XCTest

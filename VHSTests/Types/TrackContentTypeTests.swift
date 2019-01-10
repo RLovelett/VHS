@@ -107,7 +107,6 @@ final class TrackContentTypeTests: XCTestCase {
 
     func testTextBasedContentTypes() {
         property("Generated content types based on text.") <- forAll(arbitraryContentType, arbitraryTextMimeTypes, arbitraryJSON) { (contentType, mimeType, data) in
-            // swiftlint:disable:previous line_length
             let header = [ contentType: mimeType ]
             let type = Track.ContentType(from: header)
 
@@ -122,7 +121,6 @@ final class TrackContentTypeTests: XCTestCase {
 
     func testJSONBasedContentTypes() {
         property("Generated content types based on JSON.") <- forAll(arbitraryContentType, arbitraryJSONMimeTypes, arbitraryObjectJSON) { (contentType, mimeType, data) in
-            // swiftlint:disable:previous line_length
             let header = [ contentType: mimeType ]
             let type = Track.ContentType(from: header)
 
@@ -135,7 +133,6 @@ final class TrackContentTypeTests: XCTestCase {
 
     func testBase64ContentTypes() {
         property("Unmatched content types are base64 encoded.") <- forAll(arbitraryContentType, arbitraryMimeTypes, arbitraryJSON) { (contentType, mimeType, data) in
-            // swiftlint:disable:previous line_length
             let header = [ contentType: mimeType ]
             let type = Track.ContentType(from: header)
 

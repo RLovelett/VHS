@@ -20,10 +20,6 @@
 		941A7BE31D4401C600B699B7 /* VCRSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7BDD1D4401C600B699B7 /* VCRSequence.swift */; };
 		941A7BE41D4401C600B699B7 /* VCRTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7BDE1D4401C600B699B7 /* VCRTask.swift */; };
 		941A7BE51D4401C600B699B7 /* Cassette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7BDF1D4401C600B699B7 /* Cassette.swift */; };
-		941A7BE91D44085B00B699B7 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941A7BE71D44085B00B699B7 /* Argo.framework */; };
-		941A7BEA1D44085B00B699B7 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941A7BE81D44085B00B699B7 /* Curry.framework */; };
-		941A7BEE1D44089B00B699B7 /* Argo.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 941A7BEC1D44089B00B699B7 /* Argo.framework.dSYM */; };
-		941A7BEF1D44089B00B699B7 /* Curry.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 941A7BED1D44089B00B699B7 /* Curry.framework.dSYM */; };
 		941A7BFB1D440B4500B699B7 /* dvr_multiple.json in Resources */ = {isa = PBXBuildFile; fileRef = 941A7BF41D440B4500B699B7 /* dvr_multiple.json */; };
 		941A7BFC1D440B4500B699B7 /* dvr_single.json in Resources */ = {isa = PBXBuildFile; fileRef = 941A7BF51D440B4500B699B7 /* dvr_single.json */; };
 		941A7BFE1D440B4500B699B7 /* vinyl_method_path_and_headers.json in Resources */ = {isa = PBXBuildFile; fileRef = 941A7BF71D440B4500B699B7 /* vinyl_method_path_and_headers.json */; };
@@ -34,8 +30,6 @@
 		941A7C081D440D8500B699B7 /* CurryDelegateAsCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C061D440D8500B699B7 /* CurryDelegateAsCallback.swift */; };
 		941A7C091D440D8500B699B7 /* ExpectResponseFromDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C071D440D8500B699B7 /* ExpectResponseFromDelegate.swift */; };
 		941A7C0B1D440F1600B699B7 /* PlaybackSequenceMatchTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C0A1D440F1600B699B7 /* PlaybackSequenceMatchTypeTests.swift */; };
-		941A7C0C1D440F3C00B699B7 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941A7BE71D44085B00B699B7 /* Argo.framework */; };
-		941A7C0F1D440F5300B699B7 /* Argo.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 941A7C0E1D440F5300B699B7 /* Argo.framework.dSYM */; };
 		941A7C111D440FA800B699B7 /* URL+Arbitrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C101D440FA800B699B7 /* URL+Arbitrary.swift */; };
 		941A7C131D4410BE00B699B7 /* TrackContentTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C121D4410BE00B699B7 /* TrackContentTypeTests.swift */; };
 		941A7C151D44110000B699B7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A7C141D44110000B699B7 /* String.swift */; };
@@ -77,18 +71,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				941A7BEE1D44089B00B699B7 /* Argo.framework.dSYM in CopyFiles */,
-				941A7BEF1D44089B00B699B7 /* Curry.framework.dSYM in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		941A7C0D1D440F4300B699B7 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				941A7C0F1D440F5300B699B7 /* Argo.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,10 +92,6 @@
 		941A7BDD1D4401C600B699B7 /* VCRSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VCRSequence.swift; path = Types/VCRSequence.swift; sourceTree = "<group>"; };
 		941A7BDE1D4401C600B699B7 /* VCRTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VCRTask.swift; path = Types/VCRTask.swift; sourceTree = "<group>"; };
 		941A7BDF1D4401C600B699B7 /* Cassette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cassette.swift; path = Types/Cassette.swift; sourceTree = "<group>"; };
-		941A7BE71D44085B00B699B7 /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Argo.framework; path = Carthage/Build/Mac/Argo.framework; sourceTree = "<group>"; };
-		941A7BE81D44085B00B699B7 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Build/Mac/Curry.framework; sourceTree = "<group>"; };
-		941A7BEC1D44089B00B699B7 /* Argo.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Argo.framework.dSYM; path = ../Carthage/Build/Mac/Argo.framework.dSYM; sourceTree = "<group>"; };
-		941A7BED1D44089B00B699B7 /* Curry.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Curry.framework.dSYM; path = ../Carthage/Build/Mac/Curry.framework.dSYM; sourceTree = "<group>"; };
 		941A7BF41D440B4500B699B7 /* dvr_multiple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = dvr_multiple.json; path = Fixtures/dvr_multiple.json; sourceTree = "<group>"; };
 		941A7BF51D440B4500B699B7 /* dvr_single.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = dvr_single.json; path = Fixtures/dvr_single.json; sourceTree = "<group>"; };
 		941A7BF71D440B4500B699B7 /* vinyl_method_path_and_headers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vinyl_method_path_and_headers.json; path = Fixtures/vinyl_method_path_and_headers.json; sourceTree = "<group>"; };
@@ -125,7 +103,6 @@
 		941A7C061D440D8500B699B7 /* CurryDelegateAsCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurryDelegateAsCallback.swift; path = Helpers/CurryDelegateAsCallback.swift; sourceTree = "<group>"; };
 		941A7C071D440D8500B699B7 /* ExpectResponseFromDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectResponseFromDelegate.swift; path = Helpers/ExpectResponseFromDelegate.swift; sourceTree = "<group>"; };
 		941A7C0A1D440F1600B699B7 /* PlaybackSequenceMatchTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaybackSequenceMatchTypeTests.swift; path = Types/PlaybackSequenceMatchTypeTests.swift; sourceTree = "<group>"; };
-		941A7C0E1D440F5300B699B7 /* Argo.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Argo.framework.dSYM; path = ../Carthage/Build/Mac/Argo.framework.dSYM; sourceTree = "<group>"; };
 		941A7C101D440FA800B699B7 /* URL+Arbitrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "URL+Arbitrary.swift"; path = "Helpers/URL+Arbitrary.swift"; sourceTree = "<group>"; };
 		941A7C121D4410BE00B699B7 /* TrackContentTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackContentTypeTests.swift; path = Types/TrackContentTypeTests.swift; sourceTree = "<group>"; };
 		941A7C141D44110000B699B7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Helpers/String.swift; sourceTree = "<group>"; };
@@ -148,7 +125,6 @@
 		941A7C371D44126C00B699B7 /* TrackResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackResponseTests.swift; path = Types/TrackResponseTests.swift; sourceTree = "<group>"; };
 		941A7C391D4412B800B699B7 /* VCRSequenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VCRSequenceTests.swift; path = Types/VCRSequenceTests.swift; sourceTree = "<group>"; };
 		941A7C3B1D44138100B699B7 /* CassetteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CassetteTests.swift; path = Types/CassetteTests.swift; sourceTree = "<group>"; };
-		948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Carthage.xcconfig; path = Resources/Carthage.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,8 +132,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				941A7BE91D44085B00B699B7 /* Argo.framework in Frameworks */,
-				941A7BEA1D44085B00B699B7 /* Curry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +140,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				941A7BB61D43FF1100B699B7 /* VHS.framework in Frameworks */,
-				941A7C0C1D440F3C00B699B7 /* Argo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,9 +209,6 @@
 		941A7BC81D44001F00B699B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				941A7BEC1D44089B00B699B7 /* Argo.framework.dSYM */,
-				948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */,
-				941A7BED1D44089B00B699B7 /* Curry.framework.dSYM */,
 				941A7BCA1D44004800B699B7 /* Info.plist */,
 				941A7BCB1D44004800B699B7 /* VHS.h */,
 			);
@@ -261,8 +231,6 @@
 		941A7BE61D44085B00B699B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				941A7BE71D44085B00B699B7 /* Argo.framework */,
-				941A7BE81D44085B00B699B7 /* Curry.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -296,7 +264,6 @@
 		941A7BF21D440AED00B699B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				941A7C0E1D440F5300B699B7 /* Argo.framework.dSYM */,
 				941A7C041D440D5300B699B7 /* Info.plist */,
 			);
 			name = Resources;
@@ -378,8 +345,6 @@
 				941A7BB11D43FF1100B699B7 /* Sources */,
 				941A7BB21D43FF1100B699B7 /* Frameworks */,
 				941A7BB31D43FF1100B699B7 /* Resources */,
-				941A7C0D1D440F4300B699B7 /* CopyFiles */,
-				948B28101D94DA0500B412C4 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -484,25 +449,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		948B28101D94DA0500B412C4 /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				Argo,
-				Curry,
-				Runes,
-				SwiftCheck,
-			);
-			name = "Copy Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "case \"$PLATFORM_NAME\" in\nmacosx) plat=Mac;;\niphone*) plat=iOS;;\nwatch*) plat=watchOS;;\ntv*) plat=tvOS;;\nappletv*) plat=tvOS;;\n*) echo \"error: Unknown PLATFORM_NAME: $PLATFORM_NAME\"; exit 1;;\nesac\nfor (( n = 0; n < SCRIPT_INPUT_FILE_COUNT; n++ )); do\nVAR=SCRIPT_INPUT_FILE_$n\nframework=$(basename \"${!VAR}\")\nexport SCRIPT_INPUT_FILE_$n=\"$SRCROOT\"/Carthage/Build/$plat/\"$framework\".framework\ndone\n\n/usr/local/bin/carthage copy-frameworks || exit\n\nfor (( n = 0; n < SCRIPT_INPUT_FILE_COUNT; n++ )); do\nVAR=SCRIPT_INPUT_FILE_$n\nsource=${!VAR}.dSYM\ndest=${BUILT_PRODUCTS_DIR}/$(basename \"$source\")\nditto \"$source\" \"$dest\" || exit\ndone";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -557,7 +503,6 @@
 /* Begin XCBuildConfiguration section */
 		941A7BBE1D43FF1100B699B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -619,7 +564,6 @@
 		};
 		941A7BBF1D43FF1100B699B7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 948B280D1D94CA6E00B412C4 /* Carthage.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

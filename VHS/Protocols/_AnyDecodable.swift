@@ -12,7 +12,7 @@ protocol _AnyDecodable {
 }
 
 extension _AnyDecodable {
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 
         if container.decodeNil() {

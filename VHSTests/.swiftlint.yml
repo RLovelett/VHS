@@ -1,0 +1,59 @@
+disabled_rules: # rule identifiers to exclude from running
+  - conditional_binding_cascade
+  - function_parameter_count
+  - nesting
+  - todo
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - force_cast
+  - os_log
+  - missing_docs
+opt_in_rules: # some rules are only opt-in
+  - closure_end_indentation
+  - closure_parameter_position
+  - closure_spacing
+  - explicit_init
+  - empty_count
+  - first_where
+  - generic_type_name
+  - missing_docs
+  - sorted_imports
+  - switch_case_on_newline
+  # Find all the available rules by running:
+  # swiftlint rules
+
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+# rules that have both warning and error levels, can set just the warning level
+# implicitly
+line_length: 200
+# they can set both implicitly with an array
+type_body_length:
+  - 300 # warning
+  - 400 # error
+# or they can set both explicitly
+file_length:
+  warning: 500
+  error: 1200
+# naming rules can set warnings/errors for min_length and max_length
+# additionally they can set excluded names
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: iPhone # excluded via string
+variable_name:
+  min_length: # only min_length
+    error: 1 # only error
+    warning: 1
+  excluded: # excluded via string array
+    - id
+    - URL
+    - GlobalAPIKey
+trailing_comma:
+  mandatory_comma: true
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle)

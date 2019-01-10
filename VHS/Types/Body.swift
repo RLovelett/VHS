@@ -36,4 +36,3 @@ struct Body: Decodable {
     }
 
 }
-

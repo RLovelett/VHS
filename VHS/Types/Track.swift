@@ -6,7 +6,7 @@
 //  Copyright © 2016 Ryan Lovelett. All rights reserved.
 //
 
-typealias HTTPHeaders = [String : String]
+typealias HTTPHeaders = [String: String]
 
 /// The `Track` type encapsulates all of the data necessary to recreate an HTTP interaction for
 /// later re-use. Typically a `Track` instance is stored as a set inside a `Cassette`.

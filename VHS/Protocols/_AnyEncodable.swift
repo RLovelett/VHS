@@ -12,7 +12,8 @@ protocol _AnyEncodable {
 }
 
 extension _AnyEncodable {
-    public func encode(to encoder: Encoder) throws {
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
+    func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
 
         switch self.value {

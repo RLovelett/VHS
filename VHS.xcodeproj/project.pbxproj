@@ -349,6 +349,7 @@
 				941A7BA91D43FF1100B699B7 /* Headers */,
 				941A7BAA1D43FF1100B699B7 /* Resources */,
 				941A7BEB1D44087800B699B7 /* CopyFiles */,
+				943ED71F1F52401D00CE3867 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -452,6 +453,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		943ED71F1F52401D00CE3867 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -z \"$CI\" ]]; then\n    if which swiftlint >/dev/null; then\n        swiftlint\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nelse\n    echo \"Swiftlint is not running because this is a CI environment\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		941A7BA71D43FF1100B699B7 /* Sources */ = {

@@ -1,13 +1,28 @@
 ---
 stages:
+  - lint
   - test
 
 variables:
+  LANG: en_US.UTF-8
+  LANGUAGE: en_US.UTF-8
+  LC_ALL: en_US.UTF-8
   GIT_SUBMODULE_STRATEGY: recursive
   XCODE_TARGET: VHS
   XCODE_SCHEME: VHS
   XCODE_PROJECT: VHS.xcodeproj
   PRODUCT: Debug-iphonesimulator
+
+swiftlint:
+  stage: lint
+  tags:
+    - swift-4.2
+  before_script:
+    - swiftlint version
+  script:
+    - swiftlint lint --strict
+  only:
+    - merge_requests
 
 .test_template: &test_definition
   stage: test

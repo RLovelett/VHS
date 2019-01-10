@@ -14,6 +14,7 @@ import Foundation
 /// The class extends [`URLSession`](https://developer.apple.com/reference/foundation/nsurlsession).
 ///
 /// - SeeAlso: [Using NSURLSession](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html)
+// swiftlint:disable:next line_length
 /// - SeeAlso: [About the URL Loading System](https://developer.apple.com/library/prerelease/content/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i)
 public final class VCR: URLSession {
 
@@ -248,6 +249,7 @@ private func thing(from url: URL) -> [URLQueryItem]? {
 
 extension VCR.PlaybackSequence.MatchType {
 
+    // swiftlint:disable:next cyclomatic_complexity
     func match(_ track: Track, with request: URLRequest) -> Bool {
         switch self {
         case .method:
@@ -284,9 +286,9 @@ extension VCR.PlaybackSequence.MatchType {
 
 }
 
-extension VCR.Error : CustomErrorConvertible {
+extension VCR.Error: CustomErrorConvertible {
 
-    func userInfo() -> [String : String]? {
+    func userInfo() -> [String: String]? {
         return [
             NSLocalizedDescriptionKey: "Unable to find match for request.",
         ]

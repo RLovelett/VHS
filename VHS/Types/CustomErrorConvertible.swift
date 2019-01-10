@@ -8,7 +8,7 @@
 
 /// - SeeAlso: [Convert ErrorProtocol to NSError](http://stackoverflow.com/a/33307946/247730)
 protocol CustomErrorConvertible: Error {
-    func userInfo() -> [String : String]?
+    func userInfo() -> [String: String]?
     func domain() -> String
     func code() -> Int
 }

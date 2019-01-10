@@ -118,6 +118,7 @@ final class VCRTask: URLSessionDataTask {
 
     private let _taskIdentifier: Int?
     override var taskIdentifier: Int {
+        // swiftlint:disable:next force_unwrapping
         return _taskIdentifier!
     }
 

@@ -12,7 +12,7 @@ import XCTest
 final class DictionaryTests: XCTestCase {
 
     let dictionary = [
-        "Content-Type": 1
+        "Content-Type": 1,
     ]
 
     func testCaseInsensitiveKeyInDictionary() {

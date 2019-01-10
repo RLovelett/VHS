@@ -8,11 +8,9 @@
 
 extension Dictionary where Key == String {
     subscript(caseInsensitive key: Key) -> Value? {
-        get {
-            if let matchedKey = keys.first(where: { $0.caseInsensitiveCompare(key) == .orderedSame }) {
-                return self[matchedKey]
-            }
-            return nil
+        if let matchedKey = keys.first(where: { $0.caseInsensitiveCompare(key) == .orderedSame }) {
+            return self[matchedKey]
         }
+        return nil
     }
 }

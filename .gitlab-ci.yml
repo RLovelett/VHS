@@ -57,6 +57,7 @@ swiftlint:
     reports:
       junit: build/reports/junit.xml
   only:
+    - master
     - merge_requests
 
 iOS_10_3_x:

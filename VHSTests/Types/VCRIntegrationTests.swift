@@ -109,7 +109,7 @@ final class VCRIntegrationTests: XCTestCase {
 
     // MARK: - Testing the asynchronous callbacks
 
-    func testCallbackOnDefaultQueue() throws {
+    func testCallbackOnDefaultQueue() {
         let dataTaskExpectation = expectation(description: #function)
 
         let t = VCR(play: multipleTracks)
@@ -123,7 +123,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testCallbackOnMainQueue() throws {
+    func testCallbackOnMainQueue() {
         let dataTaskExpectation = expectation(description: #function)
 
         let t = VCR(play: multipleTracks, in: OperationQueue.main)
@@ -137,7 +137,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testNoCallbackWithoutCallingResume() throws {
+    func testNoCallbackWithoutCallingResume() {
         let dataTaskExpectation = expectation(description: #function)
 
         let t = VCR(play: multipleTracks, match: .cassetteOrder, replay: .none)
@@ -155,7 +155,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testCallbackFromURL() throws {
+    func testCallbackFromURL() {
         let dataTaskExpectation = expectation(description: #function)
 
         VCR(play: multipleTracks)
@@ -165,7 +165,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testCallbackUnlimitedPlaybackFromURL() throws {
+    func testCallbackUnlimitedPlaybackFromURL() {
         let dataTaskExpectation = expectation(description: #function)
 
         VCR(play: multipleTracks, replay: .unlimited)
@@ -175,7 +175,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testCallbackFromUnmatchedURL() throws {
+    func testCallbackFromUnmatchedURL() {
         let dataTaskExpectation = expectation(description: #function)
 
         let url = URL(string: "http://api.test3.com")!
@@ -188,7 +188,7 @@ final class VCRIntegrationTests: XCTestCase {
 
     // MARK: - Testing the asynchronous delegate
 
-    func testDelegatekOnDefaultQueue() throws {
+    func testDelegatekOnDefaultQueue() {
         let dataTaskExpectation = expectation(description: #function)
 
         let delegate = ExpectResponseFromDelegate(on: .default, fulfill: dataTaskExpectation)
@@ -199,7 +199,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testDelegateOnMainQueue() throws {
+    func testDelegateOnMainQueue() {
         let dataTaskExpectation = expectation(description: #function)
 
         let delegate = ExpectResponseFromDelegate(on: .main, fulfill: dataTaskExpectation)
@@ -210,7 +210,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testDelegateFromURL() throws {
+    func testDelegateFromURL() {
         let dataTaskExpectation = expectation(description: #function)
 
         let delegate = CurryDelegateAsCallback(firstTrackResponseValidation(dataTaskExpectation))
@@ -221,7 +221,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testDelegateUnlimitedPlaybackFromURL() throws {
+    func testDelegateUnlimitedPlaybackFromURL() {
         let dataTaskExpectation = expectation(description: #function)
 
         let delegate = CurryDelegateAsCallback(firstTrackResponseValidation(dataTaskExpectation))
@@ -232,7 +232,7 @@ final class VCRIntegrationTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
 
-    func testDelegateFromUnmatchedURL() throws {
+    func testDelegateFromUnmatchedURL() {
         let dataTaskExpectation = expectation(description: #function)
 
         let delegate = CurryDelegateAsCallback(unmatchedTrackErrorValidation(dataTaskExpectation))

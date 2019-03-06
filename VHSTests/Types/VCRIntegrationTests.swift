@@ -15,43 +15,49 @@ final class VCRIntegrationTests: XCTestCase {
 
     var url: URL!
 
-    typealias AsyncClosure = (XCTestExpectation) -> (Data?, URLResponse?, Error?) -> Void
-
     /// Ensure that the response callback properties match the first Track in the fixture
     /// "vinyl_method_path_and_headers".
-    private let firstTrackResponseValidation: AsyncClosure = { (expectation) in
+    private func firstTrackResponseValidation(
+        _ expectation: XCTestExpectation,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) -> (Data?, URLResponse?, Error?) -> Void {
         return { (data, response, error) in
             // Ensure the data that comes out is right
-            XCTAssertEqual(data.flatMap({ String(data: $0, encoding: .utf8) }), "No header match!")
+            XCTAssertEqual(data.flatMap({ String(data: $0, encoding: .utf8) }), "No header match!", file: file, line: line)
 
             // Ensure the HTTPURLResponse is right
             let http = response as? HTTPURLResponse
-            XCTAssertNotNil(http?.allHeaderFields)
-            XCTAssertEqual(http?.mimeType, "text/plain")
-            XCTAssertEqual(http?.statusCode, 200)
-            XCTAssertEqual(http?.expectedContentLength, 16)
-            XCTAssertEqual(http?.suggestedFilename, "headers.txt")
-            XCTAssertEqual(http?.textEncodingName, "utf-8")
-            XCTAssertEqual(http?.url, URL(string: "http://api.test1.com/get/with/no/headers"))
+            XCTAssertNotNil(http?.allHeaderFields, file: file, line: line)
+            XCTAssertEqual(http?.mimeType, "text/plain", file: file, line: line)
+            XCTAssertEqual(http?.statusCode, 200, file: file, line: line)
+            XCTAssertEqual(http?.expectedContentLength, 16, file: file, line: line)
+            XCTAssertEqual(http?.suggestedFilename, "headers.txt", file: file, line: line)
+            XCTAssertEqual(http?.textEncodingName, "utf-8", file: file, line: line)
+            XCTAssertEqual(http?.url, URL(string: "http://api.test1.com/get/with/no/headers"), file: file, line: line)
 
             // Ensure there are no errors
-            XCTAssertNil(error)
+            XCTAssertNil(error, file: file, line: line)
             expectation.fulfill()
         }
     }
 
     /// Ensure that the response callback properties match a missing track.
-    private let unmatchedTrackErrorValidation: AsyncClosure = { (expectation) in
+    private func unmatchedTrackErrorValidation(
+        _ expectation: XCTestExpectation,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) -> (Data?, URLResponse?, Error?) -> Void {
         return { (data, response, error) in
             // Ensure that no response was provided
-            XCTAssertNil(data)
-            XCTAssertNil(response)
+            XCTAssertNil(data, file: file, line: line)
+            XCTAssertNil(response, file: file, line: line)
 
             // Ensure that the error is the expected kind
-            XCTAssertNotNil(error)
+            XCTAssertNotNil(error, file: file, line: line)
 //            XCTAssertEqual((error as NSError).code?.domain, "me.lovelett.VHS.VCRError")
 //            XCTAssertEqual((error as? NSError)?.code, 404)
-            XCTAssertEqual(error?.localizedDescription, "Unable to find match for request.")
+            XCTAssertEqual(error?.localizedDescription, "Unable to find match for request.", file: file, line: line)
             expectation.fulfill()
         }
     }

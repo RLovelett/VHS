@@ -19,9 +19,15 @@ final class ExpectResponseFromDelegate: NSObject, URLSessionDataDelegate {
 
     private let expectation: XCTestExpectation
 
-    init(on type: QueueType, fulfill: XCTestExpectation) {
+    private let file: StaticString
+
+    private let line: UInt
+
+    init(on type: QueueType, fulfill: XCTestExpectation, file: StaticString = #file, line: UInt = #line) {
         self.type = type
         self.expectation = fulfill
+        self.file = file
+        self.line = line
         super.init()
     }
 
@@ -32,9 +38,9 @@ final class ExpectResponseFromDelegate: NSObject, URLSessionDataDelegate {
     ) {
         switch self.type {
         case .default:
-            XCTAssertFalse(Thread.isMainThread)
+            XCTAssertFalse(Thread.isMainThread, file: file, line: line)
         case .main:
-            XCTAssertTrue(Thread.isMainThread)
+            XCTAssertTrue(Thread.isMainThread, file: file, line: line)
         }
 
         self.expectation.fulfill()

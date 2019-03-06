@@ -185,6 +185,7 @@
 				941A7BB91D43FF1100B699B7 /* VHSTests */,
 				941A7BAD1D43FF1100B699B7 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
 		};
 		941A7BAD1D43FF1100B699B7 /* Products */ = {

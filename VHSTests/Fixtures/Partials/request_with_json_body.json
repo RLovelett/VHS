@@ -5,7 +5,10 @@
         "Content-Type": "application/json"
     },
     "body": {
-        "username": "ziggy",
-        "password": "stardust"
+        "type": "application/json",
+        "data": {
+            "username": "ziggy",
+            "password": "stardust"
+        }
     }
 }

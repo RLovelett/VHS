@@ -100,7 +100,7 @@ extension Track.Request: Decodable {
         self.url = try container.decode(URL.self, forKey: .url)
         self.method = (try? container.decode(Track.Request.Method.self, forKey: .method)) ?? .get
         self.headers = try container.decodeIfPresent(HTTPHeaders.self, forKey: .headers)
-        self.body = try? Body(from: decoder)
+        self.body = try container.decodeIfPresent(Body.self, forKey: .body)
     }
 }
 
@@ -115,6 +115,6 @@ extension Track.Response: Decodable {
         self.statusCode = try container.decodeIfPresent(Int.self, forKey: .status)
         self.headers = try container.decodeIfPresent(HTTPHeaders.self, forKey: .headers)
         self.error = nil
-        self.body = try? Body(from: decoder)
+        self.body = try container.decodeIfPresent(Body.self, forKey: .body)
     }
 }

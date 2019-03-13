@@ -3,5 +3,8 @@
     "headers": {
         "Content-Type": "text/plain;charset=utf-8"
     },
-    "body": "eyJ1c2VybmFtZSI6InppZ2d5IiwicGFzc3dvcmQiOiJzdGFyZHVzdCJ9"
+    "body": {
+        "type": "text/plain;charset=utf-8",
+        "data": "eyJ1c2VybmFtZSI6InppZ2d5IiwicGFzc3dvcmQiOiJzdGFyZHVzdCJ9"
+    }
 }

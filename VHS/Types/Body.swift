@@ -9,8 +9,8 @@
 struct Body: Decodable {
 
     enum Keys: String, CodingKey {
-        case headers
-        case body
+        case type
+        case data
     }
 
     private let raw: BodyDataDecodable?
@@ -23,15 +23,14 @@ struct Body: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
-        let headers = try container.decode([String: String].self, forKey: .headers)
-        let contentType = headers[caseInsensitive: "content-type"]
+        let type = try? container.decode(String.self, forKey: .type)
 
-        if Text.handle(contentType) {
-            self.init(try container.decode(Text.self, forKey: .body))
-        } else if JSON.handle(contentType) {
-            self.init(try container.decode(JSON.self, forKey: .body))
+        if Text.handle(type) {
+            self.init(try container.decode(Text.self, forKey: .data))
+        } else if JSON.handle(type) {
+            self.init(try container.decode(JSON.self, forKey: .data))
         } else {
-            self.init(try container.decode(Base64.self, forKey: .body))
+            self.init(try container.decode(Base64.self, forKey: .data))
         }
     }
 

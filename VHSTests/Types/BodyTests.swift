@@ -14,10 +14,8 @@ class BodyTests: XCTestCase {
     func testDecodePlainText() {
         let json = """
         {
-            "headers": {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            "body": "eyJ1c2VybmFtZSI6InppZ2d5IiwicGFzc3dvcmQiOiJzdGFyZHVzdCJ9"
+            "type": "text/plain;charset=utf-8",
+            "data": "eyJ1c2VybmFtZSI6InppZ2d5IiwicGFzc3dvcmQiOiJzdGFyZHVzdCJ9"
         }
         """.data(using: .utf8)!
 
@@ -29,8 +27,7 @@ class BodyTests: XCTestCase {
     func testDecodeBase64EncodedString() {
         let json = """
         {
-            "headers": {},
-            "body": "eyJ1c2VybmFtZSI6InppZ2d5IiwicGFzc3dvcmQiOiJzdGFyZHVzdCJ9"
+            "data": "eyJ1c2VybmFtZSI6InppZ2d5IiwicGFzc3dvcmQiOiJzdGFyZHVzdCJ9"
         }
         """.data(using: .utf8)!
 
@@ -42,10 +39,8 @@ class BodyTests: XCTestCase {
     func testDecodeJSONObject() throws {
         let json = """
         {
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": {"username":"ziggy","password":"stardust"}
+            "type": "application/json",
+            "data": {"username":"ziggy","password":"stardust"}
         }
         """.data(using: .utf8)!
 

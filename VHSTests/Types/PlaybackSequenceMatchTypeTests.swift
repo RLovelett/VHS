@@ -214,6 +214,18 @@ final class PlaybackSequenceMatchTypeBodyTests: XCTestCase {
         XCTAssertFalse(VCR.PlaybackSequence.MatchType.body.match(track, with: self.request))
     }
 
+    func testBothBodyAreNil() {
+        // Make the track have a nil body
+        let nilBodyRequest = Track.Request(url: url, method: .head, headers: reqHeader, body: nil)
+        let track = Track(request: nilBodyRequest, response: trackResponse)
+
+        // Make the request have a nil body
+        self.request.httpBody = nil
+
+        // Expect them to match
+        XCTAssertTrue(VCR.PlaybackSequence.MatchType.body.match(track, with: self.request))
+    }
+
 }
 
 // MARK: - Test matching using a custom function

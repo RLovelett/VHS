@@ -276,6 +276,8 @@ extension VCR.PlaybackSequence.MatchType {
             switch (track.request.body?.data, request.httpBody) {
             case (let trackBody?, let requestBody?):
                 return trackBody == requestBody
+            case (nil, nil):
+                return true
             default:
                 return false
             }

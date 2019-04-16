@@ -16,7 +16,7 @@ variables:
 swiftlint:
   stage: lint
   tags:
-    - swift-4.2
+    - swift-5.0
   before_script:
     - swiftlint version
   script:
@@ -65,7 +65,7 @@ iOS_10_3_x:
   variables:
     DESTINATION: platform=iOS Simulator,name=iPad Pro (9.7 inch),OS=10.3.1
   tags:
-    - swift-4.2
+    - swift-5.0
     - iOS-10.3.1
 
 iOS_11_4_x:
@@ -73,25 +73,25 @@ iOS_11_4_x:
   variables:
     DESTINATION: platform=iOS Simulator,name=iPad Pro (9.7-inch),OS=11.4
   tags:
-    - swift-4.2
+    - swift-5.0
     - iOS-11.4
 
-iOS_12_0_x:
+iOS_12_2_x:
   <<: *test_definition
   variables:
-    DESTINATION: platform=iOS Simulator,name=iPad Pro (9.7-inch),OS=12.0
+    DESTINATION: platform=iOS Simulator,name=iPad Pro (9.7-inch),OS=12.2
   tags:
-    - swift-4.2
-    - iOS-12.0
+    - swift-5.0
+    - iOS-12.2
 
-tvOS_12_0_x:
+tvOS_12_2_x:
   <<: *test_definition
   variables:
-    DESTINATION: platform=tvOS Simulator,name=Apple TV 4K,OS=12.0
+    DESTINATION: platform=tvOS Simulator,name=Apple TV 4K,OS=12.2
     PRODUCT: Debug-appletvsimulator
   tags:
-    - swift-4.2
-    - tvOS-12.0
+    - swift-5.0
+    - tvOS-12.2
 
 macOS:
   <<: *test_definition
@@ -99,4 +99,4 @@ macOS:
     DESTINATION: platform=OS X,arch=x86_64
     PRODUCT: Debug
   tags:
-    - swift-4.2
+    - swift-5.0

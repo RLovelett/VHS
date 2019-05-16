@@ -86,11 +86,10 @@ public final class VCR: URLSession {
 
             /// A custom closure or function that can be defined outside of VHS.
             ///
-            /// - Parameter using: A closure that accepts two arguments, a `Track` instance
-            ///   and `URLRequest` instance. If the closure returns `true` it is assumed that the
-            ///   `Track` matches for a given `URLRequest`. If the closure returns `false` it is
-            ///   assumed that the `Track` does _not_ match for a given `URLRequest`.
-            case custom(using: (Track, URLRequest) -> Bool)
+            /// - Parameter using: A closure that compares two `Request` arguments using logic defined outside of VHS.
+            ///   If the closure returns `true` it is assumed that the `Request` can be used for playback. If the
+            ///   closure returns `false` it is assumed that the `Request` cannot be used for playback.
+            case custom(using: (Request, Request) -> Bool)
 
         }
 
@@ -224,7 +223,7 @@ extension VCR {
         with request: URLRequest,
         completionHandler: @escaping (Data?, URLResponse?, Swift.Error?) -> Void
     ) -> URLSessionDataTask {
-        guard let response = self.sequence.next(for: request)?.response else {
+        guard let response = self.sequence.next(for: AnyRequest(request))?.response else {
             let error = Error.recordNotFound(for: request).error()
             let task = VCRTask(send: error, for: request, whenCompleteCall: completionHandler)
             task.queue = self.queue
@@ -250,30 +249,30 @@ private func thing(from url: URL) -> [URLQueryItem]? {
 extension VCR.PlaybackSequence.MatchType {
 
     // swiftlint:disable:next cyclomatic_complexity
-    func match(_ track: Track, with request: URLRequest) -> Bool {
+    func match(_ track: Request, with request: Request) -> Bool {
         switch self {
         case .method:
-            return track.request.method == request.method
+            return track.method == request.method
         case .url:
-            return track.request.url == request.url
+            return track.url == request.url
         case .path:
-            return track.request.url.path == request.url?.path
+            return track.url.path == request.url.path
         case .query:
-            switch (thing(from: track.request.url), request.url.flatMap(thing(from:))) {
+            switch (thing(from: track.url), thing(from: request.url)) {
             case (let trackQueryItems?, let rquestQueryItems?):
                 return trackQueryItems == rquestQueryItems
             default:
                 return false
             }
         case .headers:
-            switch (track.request.headers, request.allHTTPHeaderFields) {
+            switch (track.headers, request.headers) {
             case (let trackHeaders?, let requestHeaders?):
                 return trackHeaders == requestHeaders
             default:
                 return false
             }
         case .body:
-            switch (track.request.body?.data, request.httpBody) {
+            switch (track.body?.data, request.body?.data) {
             case (let trackBody?, let requestBody?):
                 return trackBody == requestBody
             case (nil, nil):

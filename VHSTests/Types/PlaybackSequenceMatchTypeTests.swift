@@ -16,32 +16,22 @@ private let mismatchURL = URL(string: "https://api.test.com")!
 // "8J+RiyBteSBuYW1lIGlzIFJ5YW4=" -> "👋 my name is Ryan"
 private let json = Body(MockBody("👋 my name is Ryan"))
 private let reqHeader = ["username": "cool"]
-private let trackRequest = Track.Request(url: url, method: .head, headers: reqHeader, body: json)
-private let resHeader = ["ETag": "686897696a7c876b7e"]
-private let trackResponse = Track.Response(url: url, statusCode: 200, headers: reqHeader, error: nil, body: nil)
-private let track = Track(request: trackRequest, response: trackResponse)
+private let trackRequest = MockRequest(url: url, method: .head, headers: reqHeader, body: json)
 
 // MARK: - Test matching by HTTP method (or verb)
 
 final class PlaybackSequenceMatchTypeMethodTests: XCTestCase {
 
-    var request: URLRequest!
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here.
-        // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: url)
-        self.request.httpMethod = "Head"
-    }
+    let uut = VCR.PlaybackSequence.MatchType.method
 
     func testSameMethod() {
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.method.match(track, with: self.request))
+        let request = MockRequest(url: url, method: .head)
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testDifferentMethod() {
-        self.request.httpMethod = "GET"
-        XCTAssertFalse(VCR.PlaybackSequence.MatchType.method.match(track, with: self.request))
+        let request = MockRequest(url: url, method: .get)
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
 }
@@ -50,22 +40,16 @@ final class PlaybackSequenceMatchTypeMethodTests: XCTestCase {
 
 final class PlaybackSequenceMatchTypeURLTests: XCTestCase {
 
-    var request: URLRequest!
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here.
-        // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: url)
-    }
+    let uut = VCR.PlaybackSequence.MatchType.url
 
     func testExactMatch() {
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.url.match(track, with: self.request))
+        let request = MockRequest(url: url, method: .get)
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testPurposelyMismatched() {
-        self.request.url = mismatchURL
-        XCTAssertFalse(VCR.PlaybackSequence.MatchType.url.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL, method: .get)
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
 }
@@ -74,7 +58,7 @@ final class PlaybackSequenceMatchTypeURLTests: XCTestCase {
 
 final class PlaybackSequenceMatchTypePathTests: XCTestCase {
 
-    var request: URLRequest!
+    let uut = VCR.PlaybackSequence.MatchType.path
 
     var components: URLComponents!
 
@@ -84,29 +68,29 @@ final class PlaybackSequenceMatchTypePathTests: XCTestCase {
         // This method is called before the invocation of each test method in the class.
         self.components = URLComponents(url: mismatchURL, resolvingAgainstBaseURL: false)
         self.components.path = baseComponents.path
-        self.request = self.components.url.flatMap({ URLRequest(url: $0) })
     }
 
     func testMatchingPath() {
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.path.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testDifferentHostname() {
         self.components.host = "api.test.com"
-        self.request.url = self.components?.url
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.path.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testDifferentQuery() {
         self.components?.queryItems = [ URLQueryItem(name: "two", value: "two") ]
-        self.request.url = self.components?.url
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.path.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testDifferentPath() {
         self.components?.path = "/now/this/is/a/path"
-        self.request.url = self.components.url
-        XCTAssertFalse(VCR.PlaybackSequence.MatchType.path.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
 }
@@ -115,7 +99,7 @@ final class PlaybackSequenceMatchTypePathTests: XCTestCase {
 
 final class PlaybackSequenceMatchTypeQueryTests: XCTestCase {
 
-    var request: URLRequest!
+    let uut = VCR.PlaybackSequence.MatchType.query
 
     var components: URLComponents!
 
@@ -125,29 +109,29 @@ final class PlaybackSequenceMatchTypeQueryTests: XCTestCase {
         // This method is called before the invocation of each test method in the class.
         self.components = URLComponents(url: mismatchURL, resolvingAgainstBaseURL: false)
         self.components.queryItems = baseComponents.queryItems
-        self.request = self.components.url.flatMap({ URLRequest(url: $0) })
     }
 
     func testMatchingQuery() {
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.query.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testQueryElementOrder() {
         self.components.queryItems = self.components.queryItems?.reversed()
-        self.request.url = self.components.url
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.query.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testRequestWithoutQueries() {
         self.components.queryItems = .none
-        self.request.url = self.components.url
-        XCTAssertFalse(VCR.PlaybackSequence.MatchType.query.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
     func testDifferentQueries() {
         self.components.queryItems = [ URLQueryItem(name: "two", value: "two") ]
-        self.request.url = self.components.url
-        XCTAssertFalse(VCR.PlaybackSequence.MatchType.query.match(track, with: self.request))
+        let request = self.components.url.map({ MockRequest(url: $0) })!
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
 }
@@ -156,31 +140,22 @@ final class PlaybackSequenceMatchTypeQueryTests: XCTestCase {
 
 final class PlaybackSequenceMatchTypeHeaderTests: XCTestCase {
 
-    var request: URLRequest!
-
-    let matcher = VCR.PlaybackSequence.MatchType.headers
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here.
-        // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: mismatchURL)
-        self.request.allHTTPHeaderFields = trackRequest.headers
-    }
+    let uut = VCR.PlaybackSequence.MatchType.headers
 
     func testMatchingHeaders() {
-        XCTAssertTrue(self.matcher.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL, headers: trackRequest.headers)
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testRequestWithoutHeaders() {
-        let trackRequest = Track.Request(url: url, method: .head, headers: nil, body: json)
-        let track = Track(request: trackRequest, response: trackResponse)
-        XCTAssertFalse(self.matcher.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL, headers: trackRequest.headers)
+        let trackRequest = MockRequest(url: url, method: .head, headers: nil, body: json)
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
     func testDifferentHeaders() {
-        self.request.allHTTPHeaderFields = [ "username": "Cool" ]
-        XCTAssertFalse(self.matcher.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL, headers: [ "username": "Cool" ])
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
 }
@@ -189,41 +164,33 @@ final class PlaybackSequenceMatchTypeHeaderTests: XCTestCase {
 
 final class PlaybackSequenceMatchTypeBodyTests: XCTestCase {
 
-    var request: URLRequest!
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here.
-        // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: mismatchURL)
-        self.request.httpBody = Data(base64Encoded: "8J+RiyBteSBuYW1lIGlzIFJ5YW4=")
-    }
+    let uut = VCR.PlaybackSequence.MatchType.body
 
     func testMatchingBody() {
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.body.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL, base64: "8J+RiyBteSBuYW1lIGlzIFJ5YW4=")
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
     func testRequestWithoutBody() {
-        let trackRequest = Track.Request(url: url, method: .head, headers: reqHeader, body: nil)
-        let track = Track(request: trackRequest, response: trackResponse)
-        XCTAssertFalse(VCR.PlaybackSequence.MatchType.body.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL, base64: "8J+RiyBteSBuYW1lIGlzIFJ5YW4=")
+        let trackRequest = MockRequest(url: url, method: .head, headers: reqHeader, body: nil)
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
     func testDifferentBody() {
-        self.request.httpBody = Data(base64Encoded: "SGkgbXkgbmFtZSBpcyBSeWFu")
-        XCTAssertFalse(VCR.PlaybackSequence.MatchType.body.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL, base64: "SGkgbXkgbmFtZSBpcyBSeWFu")
+        XCTAssertFalse(uut.match(trackRequest, with: request))
     }
 
     func testBothBodyAreNil() {
         // Make the track have a nil body
-        let nilBodyRequest = Track.Request(url: url, method: .head, headers: reqHeader, body: nil)
-        let track = Track(request: nilBodyRequest, response: trackResponse)
+        let nilBodyRequest = MockRequest(url: url, method: .head, headers: reqHeader, body: nil)
 
         // Make the request have a nil body
-        self.request.httpBody = nil
+        let request = MockRequest(url: mismatchURL)
 
         // Expect them to match
-        XCTAssertTrue(VCR.PlaybackSequence.MatchType.body.match(track, with: self.request))
+        XCTAssertTrue(uut.match(nilBodyRequest, with: request))
     }
 
 }
@@ -232,22 +199,14 @@ final class PlaybackSequenceMatchTypeBodyTests: XCTestCase {
 
 final class PlaybackSequenceMatchTypeCustomTests: XCTestCase {
 
-    var request: URLRequest!
-
-    let customMatching: (Track, URLRequest) -> Bool = { (track, _) -> Bool in
-        return track.request.method == .head && track.request.url.path == "/this/is/a/path"
-    }
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here.
-        // This method is called before the invocation of each test method in the class.
-        self.request = URLRequest(url: mismatchURL)
+    let customMatching: (Request, Request) -> Bool = { (track, _) -> Bool in
+        return track.method == .head && track.url.path == "/this/is/a/path"
     }
 
     func testMatchingCustomFunction() {
-        let matcher = VCR.PlaybackSequence.MatchType.custom(using: customMatching)
-        XCTAssertTrue(matcher.match(track, with: self.request))
+        let request = MockRequest(url: mismatchURL)
+        let uut = VCR.PlaybackSequence.MatchType.custom(using: customMatching)
+        XCTAssertTrue(uut.match(trackRequest, with: request))
     }
 
 }

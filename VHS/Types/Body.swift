@@ -6,7 +6,7 @@
 //  Copyright © 2019 Ryan Lovelett. All rights reserved.
 //
 
-struct Body: Decodable {
+public struct Body: Decodable {
 
     enum Keys: String, CodingKey {
         case type
@@ -14,14 +14,19 @@ struct Body: Decodable {
     }
 
     private let raw: BodyDataDecodable?
-    let data: Data?
+    public let data: Data?
+
+    init(_ data: Data?) {
+        self.raw = nil
+        self.data = data
+    }
 
     init<T: BodyDataDecodable>(_ raw: T) {
         self.raw = raw
         self.data = self.raw?.data
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         let type = try? container.decode(String.self, forKey: .type)
 

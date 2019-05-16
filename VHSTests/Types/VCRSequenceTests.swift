@@ -27,7 +27,7 @@ final class EphemeralSequenceTests: XCTestCase {
     }
 
     func testOrderedSequence() {
-        let request = URLRequest(url: URL(string: "http://api.test2.com")!)
+        let request = MockRequest(url: URL(string: "http://api.test2.com")!)
         var sequence = EphemeralSequence(sequenceOf: self.multipleTracks, inOrder: .cassetteOrder)
 
         // ✅ Test to make sure the sequence plays exactly in the order of the fixture
@@ -50,13 +50,13 @@ final class EphemeralSequenceTests: XCTestCase {
 
         // ✅ Test to make sure the sequence plays out of order (because matching is applied)
         let firstURL = URL(string: "http://api.test2.com")!
-        let firstRequest = URLRequest(url: firstURL)
+        let firstRequest = MockRequest(url: firstURL)
         let firstTrack = sequence.next(for: firstRequest)
         XCTAssertNotNil(firstTrack)
         XCTAssertEqual(firstTrack?.request.url, firstURL)
 
         let secondURL = URL(string: "http://api.test1.com")!
-        let secondRequest = URLRequest(url: secondURL)
+        let secondRequest = MockRequest(url: secondURL)
         let secondTrack = sequence.next(for: secondRequest)
         XCTAssertNotNil(secondTrack)
         XCTAssertEqual(secondTrack?.request.url, secondURL)
@@ -71,12 +71,11 @@ final class EphemeralSequenceTests: XCTestCase {
         var sequence = EphemeralSequence(sequenceOf: self.multipleTracks, inOrder: match)
 
         let firstURL = URL(string: "http://api.test1.com")!
-        var firstRequest = URLRequest(url: firstURL)
-        firstRequest.httpMethod = "HEAD"
+        let firstRequest = MockRequest(url: firstURL, method: .head)
         let firstTrack = sequence.next(for: firstRequest)
         XCTAssertNil(firstTrack)
 
-        let secondRequest = URLRequest(url: firstURL)
+        let secondRequest = MockRequest(url: firstURL)
         let secondTrack = sequence.next(for: secondRequest)
         XCTAssertNotNil(secondTrack)
     }
@@ -100,7 +99,7 @@ final class LoopingSequenceTests: XCTestCase {
     }
 
     func testOrderedSequence() {
-        let request = URLRequest(url: URL(string: "http://api.test2.com")!)
+        let request = MockRequest(url: URL(string: "http://api.test2.com")!)
         var sequence = LoopingSequence(sequenceOf: self.multipleTracks, inOrder: .cassetteOrder)
 
         // ✅ Test to make sure the sequence plays exactly in the order of the fixture
@@ -129,13 +128,13 @@ final class LoopingSequenceTests: XCTestCase {
 
         // ✅ Test to make sure the sequence plays out of order (because matching is applied)
         let firstURL = URL(string: "http://api.test2.com")!
-        let firstRequest = URLRequest(url: firstURL)
+        let firstRequest = MockRequest(url: firstURL)
         let firstTrack = sequence.next(for: firstRequest)
         XCTAssertNotNil(firstTrack)
         XCTAssertEqual(firstTrack?.request.url, firstURL)
 
         let secondURL = URL(string: "http://api.test1.com")!
-        let secondRequest = URLRequest(url: secondURL)
+        let secondRequest = MockRequest(url: secondURL)
         let secondTrack = sequence.next(for: secondRequest)
         XCTAssertNotNil(secondTrack)
         XCTAssertEqual(secondTrack?.request.url, secondURL)
@@ -151,7 +150,7 @@ final class LoopingSequenceTests: XCTestCase {
 
         // ✅ Test that unmatched still fail
         let unmatchedURL = URL(string: "http://www.google.com")!
-        let unmatchedRequest = URLRequest(url: unmatchedURL)
+        let unmatchedRequest = MockRequest(url: unmatchedURL)
         let unmatchedTrack = sequence.next(for: unmatchedRequest)
         XCTAssertNil(unmatchedTrack)
     }

@@ -10,13 +10,10 @@ import Foundation
 
 internal protocol VCRSequence {
     init(sequenceOf: [Track], inOrder: VCR.PlaybackSequence)
-    mutating func next(for request: URLRequest) -> Track?
+    mutating func next(for request: Request) -> Track?
 }
 
-private func byMatching(
-    _ track: Track,
-    with request: URLRequest
-) -> (Bool, VCR.PlaybackSequence.MatchType) -> Bool {
+private func byMatching(_ track: Request, with request: Request) -> (Bool, VCR.PlaybackSequence.MatchType) -> Bool {
     return { (previous: Bool, type: VCR.PlaybackSequence.MatchType) -> Bool in
         return previous && type.match(track, with: request)
     }
@@ -36,7 +33,7 @@ internal struct LoopingSequence: VCRSequence {
         self.currentIndex = sequenceOf.startIndex
     }
 
-    mutating func next(for request: URLRequest) -> Track? {
+    mutating func next(for request: Request) -> Track? {
         switch self.orderBy {
         case .cassetteOrder:
             let track = self.tracks[self.currentIndex]
@@ -47,7 +44,7 @@ internal struct LoopingSequence: VCRSequence {
             return track
         case .properties(matching: let matchers):
             for track in self.tracks {
-                guard matchers.reduce(true, byMatching(track, with: request))
+                guard matchers.reduce(true, byMatching(track.request, with: request))
                     else { continue }
                 return track
             }
@@ -73,9 +70,9 @@ internal struct EphemeralSequence: VCRSequence {
         }
     }
 
-    mutating func next(for request: URLRequest) -> Track? {
+    mutating func next(for request: Request) -> Track? {
         for (offset, track) in self.tracks.enumerated() {
-            guard matchers.reduce(true, byMatching(track, with: request)) else { continue }
+            guard matchers.reduce(true, byMatching(track.request, with: request)) else { continue }
             let index = self.tracks.index(self.tracks.startIndex, offsetBy: offset)
             self.tracks.remove(at: index)
             return track

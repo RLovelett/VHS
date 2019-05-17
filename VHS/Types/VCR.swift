@@ -71,6 +71,9 @@ public final class VCR: URLSession {
             /// The full URI of the request.
             case url
 
+            /// Scheme of the URI.
+            case scheme
+
             /// The path of the URI.
             case path
 
@@ -255,6 +258,8 @@ extension VCR.PlaybackSequence.MatchType {
             return track.method == request.method
         case .url:
             return track.url == request.url
+        case .scheme:
+            return track.url.scheme == request.url.scheme
         case .path:
             return track.url.path == request.url.path
         case .query:

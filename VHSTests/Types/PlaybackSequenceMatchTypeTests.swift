@@ -86,6 +86,38 @@ final class PlaybackSequenceMatchTypeSchemeTests: XCTestCase {
 
 }
 
+// MARK: - Test matching by requested URL scheme
+
+final class PlaybackSequenceMatchTypeHostnameTests: XCTestCase {
+
+    let uut = VCR.PlaybackSequence.MatchType.hostname
+
+    func testSameHostname() {
+        let https = MockRequest(url: URL(string: "https://google.com")!)
+        let http = MockRequest(url: URL(string: "http://google.com/search")!)
+        XCTAssertTrue(uut.match(https, with: http))
+    }
+
+    func testDifferentHost() {
+        let google = MockRequest(url: URL(string: "https://google.com")!)
+        let neverssl = MockRequest(url: URL(string: "https://neverssl.com")!)
+        XCTAssertFalse(uut.match(google, with: neverssl))
+    }
+
+    func testNoHostnames() {
+        let left = MockRequest(url: URL(string: "./google.com")!)
+        let right = MockRequest(url: URL(string: "./neverssl.com")!)
+        XCTAssertTrue(uut.match(left, with: right))
+    }
+
+    func testOneHostname() {
+        let left = MockRequest(url: URL(string: "https://google.com")!)
+        let right = MockRequest(url: URL(string: "./neverssl.com")!)
+        XCTAssertFalse(uut.match(left, with: right))
+    }
+
+}
+
 // MARK: - Test matching using just the path of the requested URL
 
 final class PlaybackSequenceMatchTypePathTests: XCTestCase {
